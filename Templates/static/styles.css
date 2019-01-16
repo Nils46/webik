@@ -1,0 +1,75 @@
+.navbar-custom
+{
+    background-color: #1a1a1a !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    color: #e6b800;
+    letter-spacing: .06em;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.nav-link
+{
+    color: white !important;
+}
+
+.display-3
+{
+    color: white;
+    font-weight: 700;
+}
+
+.jumbotron-custom
+{
+    background-color: #fbc81f  !important;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    height: 300px;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+}
+
+.column
+{
+  float: left;
+  width: 50%;
+  height: 300px;
+}
+
+.row::after
+{
+  content: "";
+  clear: both;
+  display: table;
+}
+
+body
+{
+  background-color: white;
+}
+
+.navbar-right
+{
+  float: right;
+}
+
+.btn
+{
+  border: 1px solid red;
+	color: red;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.navbar-custom li
+{
+    margin-right: 20px;
+}
+
+li
+{
+    display: inline;
+    margin-right: 40px;
+}
