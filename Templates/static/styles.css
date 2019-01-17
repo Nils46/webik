@@ -2,7 +2,7 @@
 {
     background-color: #1a1a1a !important;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+    font-weight: 300;
     color: #e6b800;
     letter-spacing: .06em;
     padding-left:30px;
@@ -22,27 +22,13 @@
 
 .jumbotron-custom
 {
-    background-color: #fbc81f  !important;
+    background-color: #1a1a1a  !important;
     font-family: 'Roboto', sans-serif;
     color: white;
-    height: 300px;
+    height: 400px;
     text-align: center;
-    padding: 50px;
+    padding: 100px;
     margin: 0;
-}
-
-.column
-{
-  float: left;
-  width: 50%;
-  height: 300px;
-}
-
-.row::after
-{
-  content: "";
-  clear: both;
-  display: table;
 }
 
 body
@@ -58,18 +44,86 @@ body
 .btn
 {
   border: 1px solid red;
-	color: red;
+	color: white;
 	background-color: transparent;
 	border-radius: 5px;
 }
 
+.btn:hover
+{
+  color: white;
+  background-color: red;
+}
+
 .navbar-custom li
 {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 li
 {
     display: inline;
     margin-right: 40px;
+}
+
+nav.navbar-custom ul li a
+{
+  position: relative;
+}
+
+nav.navbar-custom ul li a:after
+{
+  position: absolute;
+  bottom: 0.1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: red;
+  height: 1px;
+}
+
+nav.navbar-custom ul li a:hover:after
+{
+  width: 70%;
+}
+
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px !important;
+  right: 15px !important;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: black;
+}
+
+.container:hover .overlay {
+  opacity: 0.85;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
