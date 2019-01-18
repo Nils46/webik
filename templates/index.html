@@ -1,31 +1,21 @@
-{% extends "layout1.html" %}
+{% extends "layout.html" %}
 
 {% block main %}
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
-    <div class="container1">
+    <div class="container">
         <h1 class="display-3">Welcome!</h1>
         <p class="lead">Hover over the pictures below to check todays categories.</p>
     </div>
 </div>
 
-<div class="row">
-  <div class="container">
-    <img src="{{ url_for('static', filename='audi.jpg') }}" alt="audi" class="image">
-    <div class="overlay">
-      <div class="text">#Cars</div>
-      <button class="btn btn-light navbar-btn">Upload</button>
-      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
-    </div>
-  </div>
-
-  <div class="container">
-    <img src="{{ url_for('static', filename='hotel.jpeg') }}" alt="hotel" class="image">
-    <div class="overlay">
-      <div class="text">#Hotels</div>
-      <button class="btn btn-light navbar-btn">Upload</button>
-      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
-    </div>
+<div class="container">
+  <img src="{{ url_for('static', filename='audi.jpg') }}" alt="audi" class="image">
+  <div class="overlay">
+    <div class="text">#Cars</div>
+    <button class="btn btn-light navbar-btn">Upload</button>
+    <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
   </div>
 </div>
+
 {% endblock %}

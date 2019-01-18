@@ -1,0 +1,107 @@
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px !important;
+  right: 15px !important;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #213159;
+}
+
+.container:hover .overlay {
+  opacity: 0.85;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.btn {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+  border: 1px solid white;
+	color: white;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
+.btn:hover
+{
+  background-color: white !important;
+  color: black;
+}
+
+.navbar-custom
+{
+    background-color: #ffffff !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #e6b800;
+    letter-spacing: .06em;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.nav-link
+{
+    color: #213159 !important;
+    font-weight: 500;
+}
+
+.display-3
+{
+    color: white;
+    font-weight: 700;
+}
+
+.jumbotron-custom
+{
+    background-image:
+    linear-gradient(
+      rgba(61, 96, 152, 0.9),
+      rgba(33, 49, 89, 0.9)
+    ),url(camera.jpg);
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    height: 400px;
+    text-align: center;
+    padding: 120px;
+    margin: 0;
+}
+
+body
+{
+  background-color: #e7e7e7;
+}
+
+.navbar-right
+{
+  float: right;
+}
