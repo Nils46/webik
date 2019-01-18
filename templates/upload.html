@@ -7,23 +7,19 @@
      </Title>
 </head>
 <body>
-  <h1>
-   Upload hier je foto als het een auto is
+   <h1>
+   Upload hier je foto
   </h1>
   <form id= "upload-form" action= "{{  url_for('upload')  }}" method= "POST" enctype= "multipart/form-data">
   <input type="file" name= "file" accept="image/*" multiple>
+  <select name="select" method="POST">
+  <option value="auto">Auto</option>
+  <option value="boot">Boot</option>
+    </select>
   <input type="submit" value="send">
-
   </form>
 
-  <h1>
-   Upload hier je foto als het een boot is
-  </h1>
-  <form id= "upload-form" action= "{{  url_for('upload2')  }}" method= "POST" enctype= "multipart/form-data">
-  <input type="file" name= "file" accept="image/*" multiple>
-  <input type="submit" value="send">
 
-  </form>
 
 
 </body>

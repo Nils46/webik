@@ -39,8 +39,14 @@ def upload():
 
     if request.method == "POST":
 
-        print("POST!")
-        target = os.path.join(os.getcwd(), 'Image1/')
+        check = request.form.get('select')
+        print(check)
+
+        if check == "auto":
+            target = os.path.join(os.getcwd(), 'Image1/')
+
+        else:
+            target = os.path.join(os.getcwd(), 'Image2/')
 
         if not os.path.isdir(target):
             os.mkdir(target)
@@ -58,32 +64,6 @@ def upload():
         print("rendering")
         return render_template("upload.html")
 
-
-@app.route("/upload2", methods=["GET", "POST"])
-def upload2():
-
-    print("in upload")
-
-    if request.method == "POST":
-
-        print("POST!")
-        target = os.path.join(os.getcwd(), 'Image2/')
-
-        if not os.path.isdir(target):
-            os.mkdir(target)
-
-        for file in request.files.getlist("file"):
-            print(file)
-            filename = file.filename
-            destination = "/".join ([target,filename])
-            print(destination)
-            file.save(destination)
-
-        return render_template("index.html")
-
-    else:
-        print("rendering")
-        return render_template("upload.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -113,7 +93,7 @@ def login():
         # remember which user has logged in
         session["user_id"] = rows[0]["id"]
         # redirect user to home page
-        return redirect(url_for("index"))
+        return render_template("index1.html")
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -167,6 +147,6 @@ def userbio():
     if request.method == "POST":
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
 
-        return redirect(url_for("index"))
+        return render_template("index1.html")
     else:
         return render_template("userbio.html", name=name)
