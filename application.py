@@ -92,7 +92,6 @@ def login():
 
         # remember which user has logged in
         session["user_id"] = rows[0]["id"]
-
         # redirect user to home page
         return render_template("index1.html")
 
@@ -128,22 +127,26 @@ def register():
 
         session["user_id"] = entry
 
-        return redirect(url_for("index"))
+        return redirect(url_for("userbio"))
 
     else:
         return render_template("register.html")
 
-
-
-
-        result = db.execute("UPDATE users SET hash=:hash", hash=hash)
-
-        if not result:
-            return None
-
-    else:
-        return render_template("settings.html")
-
-@app.route("/top")
+@app.route("/top", methods=["GET", "POST"])
 def top():
-    return render_template("Top10.html")
+    return render_template("top.html")
+
+
+@app.route("/userbio", methods=["GET", "POST"])
+def userbio():
+
+
+    username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
+    name= username[0]["username"]
+
+    if request.method == "POST":
+        db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
+
+        return render_template("index1.html")
+    else:
+        return render_template("userbio.html", name=name)
