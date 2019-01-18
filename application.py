@@ -112,7 +112,6 @@ def login():
 
         # remember which user has logged in
         session["user_id"] = rows[0]["id"]
-
         # redirect user to home page
         return redirect(url_for("index"))
 
@@ -148,11 +147,26 @@ def register():
 
         session["user_id"] = entry
 
-        return redirect(url_for("index"))
+        return redirect(url_for("userbio"))
 
     else:
         return render_template("register.html")
 
+@app.route("/top", methods=["GET", "POST"])
+def top():
+    return render_template("top.html")
 
 
+@app.route("/userbio", methods=["GET", "POST"])
+def userbio():
 
+
+    username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
+    name= username[0]["username"]
+
+    if request.method == "POST":
+        db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
+
+        return redirect(url_for("index"))
+    else:
+        return render_template("userbio.html", name=name)
