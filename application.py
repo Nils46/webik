@@ -132,6 +132,10 @@ def register():
     else:
         return render_template("register.html")
 
+<<<<<<< HEAD
+@app.route("/settings")
+def settings():
+=======
 @app.route("/top", methods=["GET", "POST"])
 def top():
     return render_template("top.html")
@@ -139,8 +143,39 @@ def top():
 
 @app.route("/userbio", methods=["GET", "POST"])
 def userbio():
+>>>>>>> 9731eeb21c09642ea25488b063423c39ccf5d6be
 
+    if request.method == "POST":
 
+        old_password = request.form.get("old-password")
+        new_password = request.form.get("new-password")
+
+        if not old_password:
+            return None
+
+        elif not new_password:
+            return None
+
+        if len(rows) != 1 or not pwd_context.verify(request.form.get('password'), rows[0]['hash']):
+            return None
+
+<<<<<<< HEAD
+        rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id=session['user_id'])
+
+        hash = pwd_context.encrypt(new_password)
+
+        result = db.execute("UPDATE users SET hash=:hash", hash=hash)
+
+        if not result:
+            return None
+
+    else:
+        return render_template("settings.html")
+
+@app.route("/top")
+def top():
+    return render_template("Top10.html")
+=======
     username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
     name= username[0]["username"]
 
@@ -150,3 +185,4 @@ def userbio():
         return render_template("index1.html")
     else:
         return render_template("userbio.html", name=name)
+>>>>>>> 9731eeb21c09642ea25488b063423c39ccf5d6be

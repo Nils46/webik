@@ -7,15 +7,15 @@
 <head>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="static/styles.css" rel="stylesheet"/>
+    <link href="{{ url_for('static',filename='styles.css') }}" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-    <a class="navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='helios.png') }}"width="40" height="40" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='helios.png') }}"width="40" height="40" class="d-inline-block align-top">
     </a>
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,8 +32,8 @@
                 Welcome, User <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ url_for('register') }}">Profile</a>
-                <a class="dropdown-item" href="{{ url_for('register') }}">Settings</a>
+                <a class="dropdown-item" href="{{ url_for('settings') }}">Profile</a>
+                <a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Log out</a>
             </div>
