@@ -1,20 +1,51 @@
 {% extends "layout.html" %}
 
+{% block title %} Home {% endblock %}
+
 {% block main %}
 
+{% if session.user_id %}
+
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
-    <div class="container">
-        <h1 class="display-3">Welcome!</h1>
-        <p class="lead">Hover over the pictures below to check todays categories.</p>
+    <div class="container1">
+        <h1 class="display-3">Welcome on Helios, {{name}}!</h1>
     </div>
 </div>
 
-<div class="container">
-  <img src="{{ url_for('static', filename='audi.jpg') }}" alt="audi" class="image">
-  <div class="overlay">
-    <div class="text">#Cars</div>
-    <button class="btn btn-light navbar-btn">Login</button>
-    <a href="{{ url_for('login') }}" class="btn btn-light navbar-btn">Login</a>
+{% else %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom">
+    <div class="container1">
+        <h1 class="display-3">Welcome on Helios!</h1>
+    </div>
+</div>
+
+{% endif %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
+        This ensures that relatively unkown photographers can achieve more exposure.</p>
+    </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <img src="{{ url_for('static', filename='audi.jpg') }}" alt="audi" class="image">
+    <div class="overlay">
+      <div class="text">#Cars</div>
+      <button class="btn btn-light navbar-btn">Upload</button>
+      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename='hotel.jpeg') }}" alt="hotel" class="image">
+    <div class="overlay">
+      <div class="text">#Hotels</div>
+      <button class="btn btn-light navbar-btn">Upload</button>
+      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
+    </div>
   </div>
 </div>
 
