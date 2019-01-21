@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %} Profile {% endblock %}
+
+{% block main %}
+
+<div class="card" style="width: 35rem;">
+<h5 class="card-header">Profile</h5>
+  <div class="card-body">
+    <h5 class="card-title">Hi there, I'm {{username}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{userbio}}</h6>
+  </div>
+</div>
+
+<div class="row1">
+  <div class="column">
+    <a target="_blank" href="{{ url_for('static', filename='audi.jpg') }}"><img src="{{ url_for('static', filename='audi.jpg') }}"></a>
+    <a target="_blank" href="{{ url_for('static', filename='audi.jpg') }}"><img src="{{ url_for('static', filename='audi.jpg') }}"></a>
+    <a target="_blank" href="{{ url_for('static', filename='audi.jpg') }}"><img src="{{ url_for('static', filename='audi.jpg') }}"></a>
+    <a target="_blank" href="{{ url_for('static', filename='audi.jpg') }}"><img src="{{ url_for('static', filename='audi.jpg') }}"></a>
+  </div>
+ </div>
+
+{% endblock %}
