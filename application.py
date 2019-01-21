@@ -106,7 +106,7 @@ def login():
         username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
         name= username[0]["username"]
 
-        return render_template("index1.html", name=name)
+        return render_template("index.html", name=name)
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -161,23 +161,23 @@ def userbio():
     if request.method == "POST":
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
 
-        return render_template("index1.html", name=name)
+        return render_template("index.html", name=name)
     else:
         return render_template("userbio.html", name=name)
 
-@app.route("/Grinder")
+@app.route("/grinder")
 @login_required
-def Grinder():
-    url=db.execute("SELECT pic FROM userbio")
+def grinder():
+    url = db.execute("SELECT pic FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic"]
     send_url_2=(random.choice(url))
     url_choice_2=send_url_2["pic"]
-    if url_choice == url_choice_2:
-        return Grinder()
-    else:
-        return render_template("Grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
-    
+    #if url_choice == url_choice_2:
+        #return grinder()
+    #else:
+        #return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
+
 @app.route("/logout")
 def logout():
     """Log user out."""
@@ -202,5 +202,5 @@ def profile():
 
 @app.route("/settings")
 def settings():
-    
+
     return render_template("settings.html")
