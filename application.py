@@ -177,3 +177,30 @@ def Grinder():
         return Grinder()
     else:
         return render_template("Grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
+    
+@app.route("/logout")
+def logout():
+    """Log user out."""
+
+    # forget any user_id
+    session.clear()
+
+    # redirect user to login form
+    return redirect(url_for("index"))
+
+@app.route("/profile")
+@login_required
+def profile():
+
+    profile = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
+    bio = db.execute("SELECT * FROM userbio WHERE id= :id", id=session["user_id"])
+    userbio = bio[0]["bio"]
+    username = profile[0]["username"]
+
+    # redirect user to login form
+    return render_template("profile.html", username = username, userbio = userbio)
+
+@app.route("/settings")
+def settings():
+    
+    return render_template("settings.html")
