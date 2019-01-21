@@ -6,7 +6,7 @@
 
 .row
 {
-  margin: 5%;
+  margin: 4%;
 }
 
 .container1
@@ -21,6 +21,7 @@
   width: 100%;
   height: auto;
 }
+
 
 .overlay {
   position: absolute;
@@ -114,6 +115,7 @@
 {
     color: white;
     font-weight: 700;
+    font-size: 75px;
 }
 
 .jumbotron-custom
@@ -130,6 +132,24 @@
     padding: 150px;
     margin: 0;
 }
+
+.jumbotron-custom1
+{
+    background: white;
+    font-family: 'Roboto', sans-serif;
+    color: #213159;
+    height: 100px;
+    text-align: center;
+    padding: 40px;
+    margin: 0;
+}
+
+.lead
+{
+  font-size: 15px !important;
+  font-weight: 500;
+}
+
 
 body
 {
@@ -158,4 +178,26 @@ body
 main
 {
   padding-top: 50px;
+}
+
+.card
+{
+  float: none;
+  margin-top: 5% !important;
+  text-align: center;
+}
+
+.row1
+{
+    margin: 4%;
+    text-align: center;
+}
+
+.column img
+{
+    display: inline-block;
+    width: 300px;
+    height: auto;
+    background: #ccc;
+    margin: 5px;
 }
