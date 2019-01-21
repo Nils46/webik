@@ -35,6 +35,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/upload", methods=["GET", "POST"])
+@login_required
 def upload():
 
     print("in upload")
@@ -145,6 +146,7 @@ def register():
         return render_template("register.html")
 
 @app.route("/top", methods=["GET", "POST"])
+@login_required
 def top():
     return render_template("top.html")
 
@@ -164,6 +166,7 @@ def userbio():
         return render_template("userbio.html", name=name)
 
 @app.route("/Grinder")
+@login_required
 def Grinder():
     url=db.execute("SELECT pic FROM userbio")
     send_url=(random.choice(url))
