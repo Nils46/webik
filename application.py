@@ -4,11 +4,13 @@ from flask_session import Session
 from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 import os
+import random
 
 from helpers import *
 
 # configure application
 app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # ensure responses aren't cached
 if app.config["DEBUG"]:
@@ -43,11 +45,12 @@ def upload():
         print(check)
 
         if check == "auto":
-            target = os.path.join(os.getcwd(), 'Image1/')
+            target = os.path.join(os.getcwd(), 'static/Image1/')
+            target_url = 'static/Image1'
 
         else:
-            target = os.path.join(os.getcwd(), 'Image2/')
-
+            target = os.path.join(os.getcwd(), 'static/Image2/')
+            target_url = 'static/Image2'
         if not os.path.isdir(target):
             os.mkdir(target)
 
@@ -57,7 +60,11 @@ def upload():
             destination = "/".join ([target,filename])
             print(destination)
             file.save(destination)
-
+            tot_dest= "/".join([target_url,filename])
+            if check =="auto":
+                db.execute("UPDATE userbio SET pic=:pic WHERE id=:id",id=session["user_id"], pic=tot_dest)
+            else:
+                db.execute("UPDATE userbio SET pic1=:pic1 WHERE id=:id",id=session["user_id"], pic1=tot_dest)
         return render_template("index.html")
 
     else:
@@ -93,7 +100,12 @@ def login():
         # remember which user has logged in
         session["user_id"] = rows[0]["id"]
         # redirect user to home page
-        return render_template("index1.html")
+
+
+        username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
+        name= username[0]["username"]
+
+        return render_template("index1.html", name=name)
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -147,6 +159,18 @@ def userbio():
     if request.method == "POST":
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
 
-        return render_template("index1.html")
+        return render_template("index1.html", name=name)
     else:
         return render_template("userbio.html", name=name)
+
+@app.route("/Grinder")
+def Grinder():
+    url=db.execute("SELECT pic FROM userbio")
+    send_url=(random.choice(url))
+    url_choice=send_url["pic"]
+    send_url_2=(random.choice(url))
+    url_choice_2=send_url_2["pic"]
+    if url_choice == url_choice_2:
+        return Grinder()
+    else:
+        return render_template("Grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)

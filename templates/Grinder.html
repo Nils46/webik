@@ -1,6 +1,26 @@
-{% extends "layout.html" %}
+{% extends "layout1.html" %}
 
 {% block main %}
 
+<h1 align="center">Choose your favourite picture</h1>
+
+
+<div class="container">
+  <img src="{{ url_choice_2 }}" alt="audi" class="image">
+  <div class="overlay">
+    <div class="text"># Make your choice</div>
+    <button class="btn btn-light navbar-btn">choose</button>
+    <a href="{{ url_for('login') }}" class="btn btn-light navbar-btn">choose</a>
+  </div>
+</div>
+
+<div class="container">
+  <img src="{{ url_choice }}" alt="audi" class="image">
+  <div class="overlay">
+    <div class="text"># Make your choice</div>
+    <button class="btn btn-light navbar-btn">choose</button>
+    <a href="{{ url_for('login') }}" class="btn btn-light navbar-btn">choose</a>
+  </div>
+</div>
 
 {% endblock %}

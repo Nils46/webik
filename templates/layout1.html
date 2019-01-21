@@ -23,13 +23,16 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ url_for('top') }}">Top 10</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('upload') }}">Upload Coole pics</a>
+        </li>
         </ul>
     </div>
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                Welcome, User <b class="caret"></b>
+                Welcome, {{name}} <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ url_for('register') }}">Profile</a>
