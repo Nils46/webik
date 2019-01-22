@@ -118,6 +118,8 @@ def register():
     # check if user is submitting via "POST"
     if request.method == "POST":
         username = request.form.get("username")
+        first_name = request.form.get("first_name")
+        surname = request.form.get("surname")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
         # check if username was given
@@ -131,10 +133,15 @@ def register():
             return apology("must provide password once more")
         elif password != confirmation:
             return apology("Passwords didn`t match")
+        elif not first_name:
+            return apology("must provide first name")
+        elif not surname:
+            return apology("must provide surname")
+
 
         hash = pwd_context.hash(password)
-        entry = db.execute("Insert INTO users (username,hash) VALUES(:username, :hash)",
-                           username=request.form.get("username"), hash=hash)
+        entry = db.execute("Insert INTO users (username,hash, first_name, surname) VALUES(:username, :hash, :first_name, :surname)",
+                           username=request.form.get("username"), hash=hash, first_name=request.form.get("first_name"), surname=request.form.get("surname"))
         if not entry:
             return apology("Username already exists")
 
