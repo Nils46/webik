@@ -4,24 +4,31 @@
 
 <h1 align="center">Choose your favourite picture</h1>
 
-  <div class= "container">
-    <img src="{{ url_choice_2 }}" alt="audi" style="width:100%" />
-    <div class="overlay">
-      <div class="text"># Make your choice</div>
-      <button class="btn btn-light navbar-btn">choose</button>
-      <a href="{{ url_for('login') }}" class="btn btn-light navbar-btn">choose</a>
 
-    </div>
-  </div>
-
-<div class= "container">
-  <img src="{{ url_choice }}" alt="audi" style="width:100%"/>
+<div class="container">
+  <form action="{{ url_for('grinder') }}" method="POST">
+  <img src="{{ url_choice }}" alt="audi" class="image">
   <div class="overlay">
-    <div class="text"># Make your choice</div>
+    <input type="hidden" id="slider_input" name="Foto1" value="Ja" />
+    <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}"
+    <div class="text"></div>
     <button class="btn btn-light navbar-btn">choose</button>
-    <a href="{{ url_for('login') }}" class="btn btn-light navbar-btn">choose</a>
   </div>
+  </form>
 </div>
+
+<div class="container">
+  <form action="{{ url_for('grinder') }}" method="POST">
+  <img src="{{ url_choice_2 }}" alt="audi" class="image">
+  <div class="overlay">
+    <input type="hidden" id="slider_input" name="Foto2" value="Ja" />
+    <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}"
+    <div class="text"></div>
+    <button class="btn btn-light navbar-btn">choose</button>
+  </div>
+  </form>
+</div>
+
 
 
 {% endblock %}
