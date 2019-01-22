@@ -172,7 +172,7 @@ def userbio():
     else:
         return render_template("userbio.html", name=name)
 
-@app.route("/grinder")
+@app.route("/grinder", methods=["GET", "POST" ])
 @login_required
 def grinder():
     url = db.execute("SELECT pic FROM userbio")
@@ -180,11 +180,22 @@ def grinder():
     url_choice=send_url["pic"]
     send_url_2=(random.choice(url))
     url_choice_2=send_url_2["pic"]
-    #if url_choice == url_choice_2:
-        #return grinder()
-    #else:
-        #return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
+    if url_choice == url_choice_2:
+        return grinder()
+    else:
 
+        if request.method == "POST":
+            if request.form.get("Foto1") == "Ja":
+                link= request.form.get("link1")
+            elif request.form.get("Foto2") == "Ja":
+                link= request.form.get("link2")
+
+            like = 1
+            db.execute("UPDATE userbio SET like = like + :like WHERE pic = :pic", pic=link, like=like)
+
+            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
+        else:
+            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
 @app.route("/logout")
 def logout():
     """Log user out."""
