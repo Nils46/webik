@@ -1,26 +1,41 @@
-
-<html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <Title>
-      Upload
-     </Title>
-</head>
-<body align="center">
-   <h1>
-   Upload hier je foto
-  </h1>
-  <form id= "upload-form" action= "{{  url_for('upload')  }}" method= "POST" enctype= "multipart/form-data">
-  <input type="file" name= "file" accept="image/*" multiple>
-  <select name="select" method="POST">
-  <option value="auto">Auto</option>
-  <option value="boot">Boot</option>
-    </select>
-  <input type="submit" value="send">
-  </form>
+{% extends "layout.html" %}
 
 
+{% block title %} Upload {% endblock %}
+
+{% block main %}
+
+<div class="card card-upload" style="width: 35rem;">
+<h5 class="card-header">Upload</h5>
+  <div class="card-body">
+    <form id= "upload-form" action= "{{  url_for('upload')  }}" method= "POST" enctype= "multipart/form-data">
+        <fieldset>
+            <p><h6>Choose file</h6></p>
+             <div class="custom-file">
+               <input type="file" class="custom-file-input" id="customFile" name= "file" accept="image/*" multiple>
+                 <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
 
 
-</body>
-</html>
+            <p><h6>Choose category</h6></p>
+
+            <div class="form-group">
+            <select name="select" method="POST">
+                <option disabled selected value="">Category</option>
+                  <option value="auto">Auto</option>
+                  <option value="boot">Boot</option>
+            </select>
+
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success btn-upload" type="submit">Upload</button>
+            </div>
+        </fieldset>
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}
