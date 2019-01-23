@@ -1,6 +1,31 @@
 {% extends "layout.html" %}
 
+{% block title %} Settings {% endblock %}
+
 {% block main %}
 
+<div class="card card1" style="width: 35rem;">
+<h5 class="card-header">Settings</h5>
+  <div class="card-body">
+    <h5 class="card-title">Change password</h5>
+
+    <form action="{{ url_for('settings') }}" method="POST">
+        <div class="form-group">
+            <label for="old_password"> Old password</label>
+            <input class="form-control" name="old_password" placeholder="Old password" type="password">
+        </div>
+
+        <div class="form-group">
+            <label for="new_password"> New password</label>
+            <input class="form-control" name="new_password" placeholder="New password" type="password">
+        </div>
+
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-settings">Change</button>
+        </div>
+    </form>
+
+  </div>
+</div>
 
 {% endblock %}
