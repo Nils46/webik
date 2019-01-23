@@ -31,20 +31,18 @@
 
 <div class="row">
   <div class="container">
-    <img src="{{ url_for('static', filename='audi.jpg') }}" alt="audi" class="image">
+    <img src="static/{{cats[2]}}" alt="{{cats[0]}}" class="image">
     <div class="overlay">
-      <div class="text">#Cars</div>
-      <button class="btn btn-light navbar-btn">Upload</button>
-      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
+      <div class="text">#{{cats[0]}}</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
   </div>
 
   <div class="container">
-    <img src="{{ url_for('static', filename='hotel.jpeg') }}" alt="hotel" class="image">
+    <img src= "static/{{cats[3]}}" alt= {{cats[1]}} class="image" id="image">
     <div class="overlay">
-      <div class="text">#Hotels</div>
-      <button class="btn btn-light navbar-btn">Upload</button>
-      <a href="{{ url_for('upload') }}" class="btn btn-light navbar-btn">Upload</a>
+      <div class="text">#{{cats[1]}}</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
   </div>
 </div>
