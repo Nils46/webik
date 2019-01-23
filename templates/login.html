@@ -4,7 +4,11 @@
 {% endblock %}
 
 {% block main %}
-<form action="{{ url_for('login') }}" method="post">
+
+<div class="card" style="width: 35rem;">
+<h5 class="card-header">Log in</h5>
+  <div class="card-body">
+    <form action="{{ url_for('login') }}" method="post">
         <fieldset>
             <div class="form-group">
                 <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
@@ -13,9 +17,15 @@
                 <input class="form-control" name="password" placeholder="Password" type="password"/>
             </div>
             <div class="form-group">
-                <button class="btn btn-default" type="submit">Log In</button>
+                <button class="btn btn-default btn-login" type="submit">Log In</button>
             </div>
         </fieldset>
-    </form>
+</form>
+
+
+
+  </div>
+</div>
+
 
 {% endblock %}

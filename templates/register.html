@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
 
+{% block title %} Register {% endblock %}
+
 {% block main %}
+
+<div class="card" style="width: 35rem;">
+<h5 class="card-header">Register</h5>
+  <div class="card-body">
+
+
 <form action="{{ url_for('register') }}" method="post">
         <fieldset>
             <div class="form-group">
@@ -22,6 +30,10 @@
                 <button class="btn btn-default" type="submit">Continue</button>
             </div>
         </fieldset>
-    </form>
+</form>
+
+  </div>
+</div>
+
 
 {% endblock %}
