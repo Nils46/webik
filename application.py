@@ -72,7 +72,7 @@ def upload():
                 db.execute("UPDATE userbio SET pic=:pic WHERE id=:id",id=session["user_id"], pic=tot_dest)
             else:
                 db.execute("UPDATE userbio SET pic1=:pic1 WHERE id=:id",id=session["user_id"], pic1=tot_dest)
-        
+
         cats = categories()
         name = names()
 
@@ -170,8 +170,8 @@ def top():
 @app.route("/userbio", methods=["GET", "POST"])
 def userbio():
 
-        cats = categories()
-        name = names()
+    cats = categories()
+    name = names()
 
     if request.method == "POST":
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
@@ -251,7 +251,7 @@ def settings():
 
         if not result:
             return apology("Something went wrong")
-        
+
         cats = categories()
         name = names()
 
