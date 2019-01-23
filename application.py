@@ -31,14 +31,20 @@ Session(app)
 db = SQL("sqlite:///database.db")
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return render_template("index.html")
+
+    cats = categories()
+
+    if session.get("user_id") is None:
+        return render_template("index.html", cats = cats)
+    else:
+        name = names()
+        return render_template("index.html", cats = cats, name = name)
 
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload():
-
-    print("in upload")
 
     if request.method == "POST":
 
@@ -66,7 +72,11 @@ def upload():
                 db.execute("UPDATE userbio SET pic=:pic WHERE id=:id",id=session["user_id"], pic=tot_dest)
             else:
                 db.execute("UPDATE userbio SET pic1=:pic1 WHERE id=:id",id=session["user_id"], pic1=tot_dest)
-        return render_template("index.html")
+        
+        cats = categories()
+        name = names()
+
+        return render_template("index.html", cats=cats, name=name)
 
     else:
         print("rendering")
@@ -102,11 +112,10 @@ def login():
         session["user_id"] = rows[0]["id"]
         # redirect user to home page
 
+        cats = categories()
+        name = names()
 
-        username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
-        name= username[0]["username"]
-
-        return render_template("index.html", name=name)
+        return render_template("index.html", cats=cats, name=name)
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -161,14 +170,13 @@ def top():
 @app.route("/userbio", methods=["GET", "POST"])
 def userbio():
 
-
-    username = db.execute("SELECT username FROM users WHERE id= :id", id=session["user_id"])
-    name= username[0]["username"]
+        cats = categories()
+        name = names()
 
     if request.method == "POST":
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
 
-        return render_template("index.html", name=name)
+        return render_template("index.html", cats=cats, name=name)
     else:
         return render_template("userbio.html", name=name)
 
@@ -218,7 +226,36 @@ def profile():
     # redirect user to login form
     return render_template("profile.html", username = username, userbio = userbio)
 
-@app.route("/settings")
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
 def settings():
 
-    return render_template("settings.html")
+    if request.method == "POST":
+
+        old_password = request.form.get("old_password")
+        new_password = request.form.get("new_password")
+
+        if not old_password:
+            return apology("Fill in all fields")
+        elif not new_password:
+            return apology("Fill in all fields")
+
+        rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id = session["user_id"])
+
+        if len(rows) != 1 or not pwd_context.verify(request.form.get("old_password"), rows[0]['hash']):
+            return apology("Old password invalid")
+
+        hash = pwd_context.hash(new_password)
+
+        result = db.execute("UPDATE users SET hash = :hash", hash = hash)
+
+        if not result:
+            return apology("Something went wrong")
+        
+        cats = categories()
+        name = names()
+
+        return render_template("index.html", cats=cats, name=name)
+
+    else:
+        return render_template("settings.html")
