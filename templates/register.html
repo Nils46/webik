@@ -4,36 +4,50 @@
 
 {% block main %}
 
-<div class="card" style="width: 35rem;">
+<div class="card card-register" style="width: 35rem;">
 <h5 class="card-header">Register</h5>
   <div class="card-body">
 
+      <h6 class="card-subtitle mb-2 text-muted">We do not sell your account details to third parties.</h6>
 
-<form action="{{ url_for('register') }}" method="post">
-        <fieldset>
-            <div class="form-group">
-                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
-            </div>
-            <div class="form-group">
-                <input autocomplete="off" autofocus class="form-control" name="first_name" placeholder="First Name" type="text"/>
-            </div>
-            <div class="form-group">
-                <input autocomplete="off" autofocus class="form-control" name="surname" placeholder="Surname" type="text"/>
-            </div>
-            <div class="form-group">
-                <input class="form-control" name="password" placeholder="Password" type="password"/>
-            </div>
-            <div class="form-group">
-                <input class="form-control" name="confirmation" placeholder="Repeat Password" type="password"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">Continue</button>
-            </div>
-        </fieldset>
-</form>
+<div class="form">
+    <form action="{{ url_for('register') }}" method="post">
+            <fieldset>
 
-  </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="first_name">First name</label>
+                      <input type="text" class="form-control" name="first_name" id="first" placeholder="First name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="surname">Surname</label>
+                      <input type="text" class="form-control" name="surname" id="second" placeholder="Surname" required>
+                    </div>
+                  </div>
+
+                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="confirmation">Repeat password</label>
+                      <input type="password" class="form-control" name="confirmation" id="confirm" placeholder="Password (again)" required>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit">Register!</button>
+                </div>
+            </fieldset>
+    </form>
 </div>
-
+</div>
+</div>
 
 {% endblock %}
