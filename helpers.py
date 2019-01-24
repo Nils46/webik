@@ -41,6 +41,12 @@ def login_required(f):
 
 
 def categories():
+    
+    #random.seed(datetime.today().day)
+    #print(datetime.today().day)
+    #number = random.randint(0,24)
+    #print(number)
+    
     categories = ["Cars", "Yachts", "Hotels", "Watches"]
     random_category = random.choice(categories)
     random_category_1 = random.choice(categories)
