@@ -51,13 +51,22 @@ def upload():
         check = request.form.get('select')
         print(check)
 
-        if check == "auto":
+        if check == "Cars":
             target = os.path.join(os.getcwd(), 'static/Image1/')
             target_url = 'static/Image1'
 
-        else:
+        elif check == "Yachts":
             target = os.path.join(os.getcwd(), 'static/Image2/')
             target_url = 'static/Image2'
+
+        elif check == "Hotels":
+            target = os.path.join(os.getcwd(), 'static/Image3/')
+            target_url = 'static/Image3'
+
+        elif check == "Watches":
+            target = os.path.join(os.getcwd(), 'static/Image4/')
+            target_url = 'static/Image4'
+
         if not os.path.isdir(target):
             os.mkdir(target)
 
@@ -68,20 +77,19 @@ def upload():
             print(destination)
             file.save(destination)
             tot_dest= "/".join([target_url,filename])
-            if check =="auto":
+            if check =="Cars":
                 db.execute("UPDATE userbio SET pic=:pic WHERE id=:id",id=session["user_id"], pic=tot_dest)
-            else:
+            elif check =="Yachts":
                 db.execute("UPDATE userbio SET pic1=:pic1 WHERE id=:id",id=session["user_id"], pic1=tot_dest)
-
-        cats = categories()
-        name = names()
-
-        return render_template("index.html", cats=cats, name=name)
+            elif check =="Hotels":
+                db.execute("UPDATE userbio SET pic2=:pic2 WHERE id=:id",id=session["user_id"], pic2=tot_dest)
+            else:
+                db.execute("UPDATE userbio SET pic3=:pic3 WHERE id=:id",id=session["user_id"], pic3=tot_dest)
+        return render_template("index.html")
 
     else:
         print("rendering")
         return render_template("upload.html")
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -180,30 +188,25 @@ def userbio():
     else:
         return render_template("userbio.html", name=name)
 
-@app.route("/grinder", methods=["GET", "POST" ])
+@app.route("/grinder_car", methods=["GET", "POST" ])
 @login_required
-def grinder():
-    url = db.execute("SELECT pic FROM userbio")
-    send_url=(random.choice(url))
-    url_choice=send_url["pic"]
-    send_url_2=(random.choice(url))
-    url_choice_2=send_url_2["pic"]
-    if url_choice == url_choice_2:
-        return grinder()
-    else:
+def grinder_car():
+    return grinder0()
 
-        if request.method == "POST":
-            if request.form.get("Foto1") == "Ja":
-                link= request.form.get("link1")
-            elif request.form.get("Foto2") == "Ja":
-                link= request.form.get("link2")
+@app.route("/grinder_yacht", methods=["GET", "POST" ])
+@login_required
+def grinder_yacht():
+    return grinder1()
 
-            like = 1
-            db.execute("UPDATE userbio SET like = like + :like WHERE pic = :pic", pic=link, like=like)
+@app.route("/grinder_hotel", methods=["GET", "POST" ])
+@login_required
+def grinder_hotel():
+    return grinder2()
 
-            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
-        else:
-            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2)
+@app.route("/grinder_watch", methods=["GET", "POST" ])
+@login_required
+def grinder_watch():
+    return grinder3()
 @app.route("/logout")
 def logout():
     """Log user out."""
