@@ -222,12 +222,13 @@ def logout():
 def profile():
 
     profile = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
+    pictures = db.execute("SELECT * FROM userbio WHERE id= :id", id=session["user_id"])
     bio = db.execute("SELECT * FROM userbio WHERE id= :id", id=session["user_id"])
     userbio = bio[0]["bio"]
     username = profile[0]["username"]
 
     # redirect user to login form
-    return render_template("profile.html", username = username, userbio = userbio)
+    return render_template("profile.html", username = username, userbio = userbio, pictures = pictures)
 
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
