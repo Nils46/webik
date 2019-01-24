@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom2">
+    <div class="container1">
+        <p class="lead1">Categories</p>
+    </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <img src="{{ url_for('static', filename = 'Hotels.jpg')}}" alt="Hotels" class="image">
+    <div class="overlay">
+      <div class="text">Hotels</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename = 'Yachts.jpg')}}" alt="Yachts" class="image" id="image">
+    <div class="overlay">
+      <div class="text">Yachts</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename = 'Watches.jpg')}}" alt="Watches" class="image">
+    <div class="overlay">
+      <div class="text">Watches</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="{{ url_for('static', filename = 'Cars.jpg')}}" alt="Cars" class="image" id="image">
+    <div class="overlay">
+      <div class="text">Cars</div>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
