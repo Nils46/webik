@@ -2,11 +2,13 @@
 {
   position: relative;
   width:50%;
+  margin-bottom: 30px !important;
 }
 
 .row
 {
   margin: 4%;
+  margin-top: 30px !important;
 }
 
 .container1
@@ -92,7 +94,7 @@
 
 .navbar-custom
 {
-    background-color: #ffffff !important;
+    background-color: white !important;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #e6b800;
@@ -122,8 +124,8 @@
 {
     background-image:
     linear-gradient(
-      rgba(61, 96, 152, 0.9),
-      rgba(33, 49, 89, 0.9)
+      rgba(61, 96, 152, 0.8),
+      rgba(33, 49, 89, 0.8)
     ),url(camera.jpg);
     font-family: 'Roboto', sans-serif;
     color: white;
@@ -144,21 +146,36 @@
     margin: 0;
 }
 
+.jumbotron-custom2
+{
+    background: transparent;
+    color: #213159;
+    height: 100px;
+    padding: 40px;
+    margin: 0;
+}
+
 .lead
 {
   font-size: 15px !important;
   font-weight: 500;
 }
 
+.lead1
+{
+    font-size: 30px;
+    font-weight: 700;
+}
+
 
 body
 {
-  background-color: #e7e7e7;
+  background-color: white;
 }
 
 .navbar-right
 {
-  float: right;
+  float: right !important;
 }
 
 .row::after {
@@ -273,7 +290,7 @@ main
   background-color: transparent;
   color: #213159;
   border: 1px solid #213159;
-  left: 85%;
+  left: 87%;
 }
 
 .navbar-btn:hover
@@ -284,7 +301,7 @@ main
 
 .card-upload
 {
-  height: 350px;
+  height: 450px;
 }
 
 .btn-upload
@@ -298,4 +315,29 @@ main
   text-align: center;
   width: 100px;
   top: 80% !important;
+}
+
+.form
+{
+  text-align: left !important;
+}
+
+.card-register
+{
+  height: 400px;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+  margin-top: 5% !important;
+  text-align: center;
+}
+
+.fas
+{
+  padding-right: 10px;
+}
+
+.custom-select
+{
+  width: 7rem;
 }
