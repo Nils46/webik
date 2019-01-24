@@ -8,7 +8,7 @@
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
     <div class="container1">
-        <h1 class="display-3">Welcome on Helios, {{name}}!</h1>
+        <h1 class="display-3">Welcome back, {{name}}!</h1>
     </div>
 </div>
 
@@ -17,15 +17,17 @@
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
     <div class="container1">
         <h1 class="display-3">Welcome on Helios!</h1>
+        <a href="{{ url_for('register') }}" class="btn btn-success">Register now!</a>
     </div>
 </div>
 
 {% endif %}
 
-<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+{% if session.user_id %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom2">
     <div class="container1">
-        <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
-        This ensures that relatively unkown photographers can achieve more exposure.</p>
+        <p class="lead1">Today's featured categories are #{{cats[0]}} and #{{cats[1]}}.</p>
     </div>
 </div>
 
@@ -34,7 +36,7 @@
     <img src="static/{{cats[2]}}" alt="{{cats[0]}}" class="image">
     <div class="overlay">
       <div class="text">#{{cats[0]}}</div>
-      <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
   </div>
 
@@ -42,9 +44,26 @@
     <img src= "static/{{cats[3]}}" alt= {{cats[1]}} class="image" id="image">
     <div class="overlay">
       <div class="text">#{{cats[1]}}</div>
-      <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
+      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
   </div>
 </div>
+
+{% else %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom2">
+    <div class="container1">
+        <p class="lead1">Why should you use Helios?</p>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
+        This ensures that relatively unkown photographers can achieve more exposure.</p>
+    </div>
+</div>
+
+{% endif %}
 
 {% endblock %}
