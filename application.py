@@ -38,6 +38,7 @@ def index():
 
     if session.get("user_id") is None:
         return render_template("index.html", cats = cats)
+
     else:
         name = names()
         return render_template("index.html", cats = cats, name = name)
@@ -67,9 +68,6 @@ def upload():
             target = os.path.join(os.getcwd(), 'static/Image4/')
             target_url = 'static/Image4'
 
-        if not os.path.isdir(target):
-            os.mkdir(target)
-
         for file in request.files.getlist("file"):
             print(file)
             filename = file.filename
@@ -85,7 +83,8 @@ def upload():
                 db.execute("UPDATE userbio SET pic2=:pic2 WHERE id=:id",id=session["user_id"], pic2=tot_dest)
             else:
                 db.execute("UPDATE userbio SET pic3=:pic3 WHERE id=:id",id=session["user_id"], pic3=tot_dest)
-        return render_template("index.html")
+
+        return redirect(url_for("index"))
 
     else:
         print("rendering")
@@ -172,7 +171,8 @@ def register():
 @app.route("/top", methods=["GET", "POST"])
 @login_required
 def top():
-    return render_template("top.html")
+    update_total_likes()
+    return draw_table()
 
 @app.route("/cats", methods=["GET", "POST"])
 @login_required

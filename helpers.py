@@ -6,7 +6,7 @@ from tempfile import mkdtemp
 from datetime import datetime
 import os
 import random
-
+import time
 from flask import redirect, render_template, request, session
 from functools import wraps
 
@@ -41,12 +41,12 @@ def login_required(f):
 
 
 def categories():
-    
+
     #random.seed(datetime.today().day)
     #print(datetime.today().day)
     #number = random.randint(0,24)
     #print(number)
-    
+
     categories = ["Cars", "Yachts", "Hotels", "Watches"]
     random_category = random.choice(categories)
     random_category_1 = random.choice(categories)
@@ -100,11 +100,11 @@ def grinder1(): #if cat == "Hotels":
             if request.form.get("Foto3") == "Ja":
                 link= request.form.get("link1")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic1 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like1 = like1 + :like WHERE pic1 = :pic", pic=link, like=like)
             elif request.form.get("Foto4") == "Ja":
                 link= request.form.get("link2")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic1 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like1 = like1 + :like WHERE pic1 = :pic", pic=link, like=like)
 
 
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item2")
@@ -127,11 +127,11 @@ def grinder2(): #if cat == "Hotels":
             if request.form.get("Foto5") == "Ja":
                 link= request.form.get("link1")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic2 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like2 = like2 + :like WHERE pic2 = :pic", pic=link, like=like)
             elif request.form.get("Foto6") == "Ja":
                 link= request.form.get("link2")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic2 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like2 = like2 + :like WHERE pic2 = :pic", pic=link, like=like)
 
 
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item3")
@@ -154,13 +154,59 @@ def grinder3(): #if cat == "Hotels":
             if request.form.get("Foto7") == "Ja":
                 link= request.form.get("link1")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic3 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like3 = like3 + :like WHERE pic3 = :pic", pic=link, like=like)
             elif request.form.get("Foto8") == "Ja":
                 link= request.form.get("link2")
                 like = 1
-                db.execute("UPDATE userbio SET like = like + :like WHERE pic3 = :pic", pic=link, like=like)
+                db.execute("UPDATE userbio SET like3 = like3 + :like WHERE pic3 = :pic", pic=link, like=like)
 
 
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item4")
         else:
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item4")
+
+def update_total_likes():
+    temp = db.execute("SELECT id FROM userbio")
+    like=0
+    like1=0
+    like2=0
+    like3=0
+    db.execute("UPDATE users SET tot = 0")
+    for x in temp:
+        user=(x["id"])
+        temp_like = db.execute("SELECT like FROM userbio WHERE id= :id", id=user)
+        temp_like1 = db.execute("SELECT like1 FROM userbio WHERE id= :id", id=user)
+        temp_like2 = db.execute("SELECT like2 FROM userbio WHERE id= :id", id=user)
+        temp_like3 = db.execute("SELECT like3 FROM userbio WHERE id= :id", id=user)
+        for y in temp_like:
+            like=(y["like"])
+        db.execute("UPDATE users SET tot = tot + :like WHERE id = :id", id=user, like=like)
+        for y in temp_like1:
+            like1=(y)["like1"]
+        db.execute("UPDATE users SET tot = tot + :like1 WHERE id = :id", id=user, like1=like1)
+        for y in temp_like2:
+            like2=(y)["like2"]
+        db.execute("UPDATE users SET tot = tot + :like2 WHERE id = :id", id=user, like2=like2)
+        for y in temp_like3:
+            like3=(y)["like3"]
+        db.execute("UPDATE users SET tot = tot + :like3 WHERE id = :id", id=user, like3=like3)
+    return
+
+def draw_table():
+    userlist=list()
+    valuelist=list()
+    datadict={}
+    datadict1={}
+    datadict2={}
+    update_total_likes()
+    temp =db.execute("SELECT username,tot FROM users")
+    for x in temp:
+        userlist.append(x["username"])
+        valuelist.append(x["tot"])
+    data = dict(zip(userlist,valuelist))
+
+    data = sorted(data.items(), key = lambda x:x[1], reverse=True)
+    data=dict(data)
+
+
+    return render_template("top.html", data=data)

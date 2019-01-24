@@ -36,17 +36,39 @@
     <img src="static/{{cats[2]}}" alt="{{cats[0]}}" class="image">
     <div class="overlay">
       <div class="text">#{{cats[0]}}</div>
-      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+      {% if cats[0] == "Cars"%}
+      <a href="{{ url_for('grinder_car') }}" class="btn btn-light pic-btn">Go!</a>
+      {% endif %}
+      {% if cats[0] == "Yachts"%}
+      <a href="{{ url_for('grinder_yacht') }}" class="btn btn-light pic-btn">Go!</a>
+      {% endif %}
+      {% if cats[0] == "Hotels"%}
+      <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
+      {% endif %}
+      {% if cats[0] == "Watches"%}
+      <a href="{{ url_for('grinder_watch') }}" class="btn btn-light pic-btn">Go!</a>
+      {% endif %}
     </div>
   </div>
 
-  <div class="container">
+<div class="container">
     <img src= "static/{{cats[3]}}" alt= {{cats[1]}} class="image" id="image">
     <div class="overlay">
-      <div class="text">#{{cats[1]}}</div>
-      <a href="{{ url_for('grinder') }}" class="btn btn-light pic-btn">Go!</a>
+        <div class="text">#{{cats[1]}}</div>
+        {% if cats[1] == "Cars"%}
+        <a href="{{ url_for('grinder_car') }}" class="btn btn-light pic-btn">Go!</a>
+        {% endif %}
+        {% if cats[1] == "Yachts"%}
+        <a href="{{ url_for('grinder_yacht') }}" class="btn btn-light pic-btn">Go!</a>
+        {% endif %}
+        {% if cats[1] == "Hotels"%}
+        <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
+        {% endif %}
+        {% if cats[1] == "Watches"%}
+        <a href="{{ url_for('grinder_watch') }}" class="btn btn-light pic-btn">Go!</a>
+        {% endif %}
+        </div>
     </div>
-  </div>
 </div>
 
 {% else %}
