@@ -53,7 +53,10 @@ def categories():
     url = random_category + ".jpg"
     url1 = random_category_1 + ".jpg"
 
-    return random_category, random_category_1, url, url1
+    if random_category != random_category_1:
+        return random_category, random_category_1, url, url1
+    else:
+        return categories()
 
 def names():
     account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
