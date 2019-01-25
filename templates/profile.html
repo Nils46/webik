@@ -11,14 +11,15 @@
     <h6 class="card-subtitle mb-2 text-muted">{{userbio}}</h6>
     <a href="#" class="btn btn-success btn-follow">Follow</a>
   </div>
-
 </div>
 
 <div class="row1">
   <div class="column">
     {% for image in pictures %}
-      <a target="_blank" href="{{ url_for('static', filename='Watches.jpg') }}"><img src="{{ image.pic }}"></a>
-      <a target="_blank" href="{{ url_for('static', filename='Watches.jpg') }}"><img src="{{ image.pic1 }}"></a>
+      <a target="_blank" href="{{ url_for('static', filename='image.pic') }}"><img src="{{ image.pic }}"></a>
+      <a target="_blank" href="{{ url_for('static', filename='image.pic1') }}"><img src="{{ image.pic1 }}"></a>
+      <a target="_blank" href="{{ url_for('static', filename='image.pic2') }}"><img src="{{ image.pic2 }}"></a>
+      <a target="_blank" href="{{ url_for('static', filename='image.pic3') }}"><img src="{{ image.pic3 }}"></a>
     {% endfor %}
   </div>
 </div>
