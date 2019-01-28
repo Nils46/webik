@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %} Ranking {% endblock %}
+
 {% block main %}
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom2">
@@ -8,7 +10,39 @@
     </div>
 </div>
 
+<div class="row row-1">
+    <div class="card" style="width: 19rem;">
+      <img src="" class="card-img-top" alt="Cars">
+      <div class="card-body">
+        <p class="card-text">{{ desc }}</p>
+        <a href="" class="btn btn-primary">Full size</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 19rem;">
+      <img src="" class="card-img-top" alt="Cars">
+      <div class="card-body">
+        <p class="card-text">{{ desc }}</p>
+        <a href="" class="btn btn-primary">Full size</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 19rem;">
+      <img src="" class="card-img-top" alt="Cars">
+      <div class="card-body">
+        <p class="card-text">{{ desc }}</p>
+        <a href="" class="btn btn-primary">Full size</a>
+      </div>
+    </div>
+</div>
+
 <table class="table table-striped">
+    <thead class="thead">
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Points</th>
+        </tr>
+    </thead>
         <tbody>
             {% for key, value in data.items() %}
            <tr>
