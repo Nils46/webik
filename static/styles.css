@@ -92,6 +92,23 @@
   color: black;
 }
 
+.pic-btn-low
+{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+  border: 1px solid white;
+	color: white;
+	background-color: transparent;
+	border-radius: 5px;
+}
+
 .navbar-custom
 {
     background-color: white !important;
