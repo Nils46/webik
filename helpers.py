@@ -9,6 +9,7 @@ import random
 import time
 from flask import redirect, render_template, request, session
 from functools import wraps
+from werkzeug.utils import secure_filename
 
 db = SQL("sqlite:///database.db")
 
@@ -46,7 +47,7 @@ def names():
 def grinder0(): #if cat == "Hotels":
 
     random.seed(datetime.today().microsecond)
-    
+
     url = db.execute("SELECT pic FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic"]
@@ -70,14 +71,13 @@ def grinder0(): #if cat == "Hotels":
                 like = 1
                 db.execute("UPDATE userbio SET like = like + :like WHERE pic = :pic", pic=link, like=like)
 
-
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item1")
         else:
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item1")
 
 def grinder1(): #if cat == "Hotels":
 
-    random.seed(datetime.today().microsecond)
+    #random.seed(datetime.today().microsecond)
     url = db.execute("SELECT pic1 FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic1"]
@@ -109,8 +109,8 @@ def grinder1(): #if cat == "Hotels":
 
 def grinder2(): #if cat == "Hotels":
 
-    random.seed(datetime.today().microsecond)
-    
+    #random.seed(datetime.today().microsecond)
+
     url = db.execute("SELECT pic2 FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic2"]
@@ -142,8 +142,8 @@ def grinder2(): #if cat == "Hotels":
 
 def grinder3(): #if cat == "Hotels":
 
-    random.seed(datetime.today().microsecond)
-    
+    #random.seed(datetime.today().microsecond)
+
     url = db.execute("SELECT pic3 FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic3"]
@@ -166,7 +166,6 @@ def grinder3(): #if cat == "Hotels":
                 link= request.form.get("link2")
                 like = 1
                 db.execute("UPDATE userbio SET like3 = like3 + :like WHERE pic3 = :pic", pic=link, like=like)
-
 
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, cat="item4")
         else:
@@ -213,6 +212,9 @@ def draw_table():
     return render_template("top.html", data=data)
 
 def upload0():
+
+
+
     if request.method == "POST":
 
         check = request.form.get('select')
@@ -238,20 +240,22 @@ def upload0():
             os.mkdir(target)
             if check == "Cars":
                 db.execute("ALTER TABLE userbio ADD pic text")
-                db.execute("ALTER TABLE userbio ADD like int DEFAULT 0")
+                db.execute("ALTER TABLE userbio ADD like INT DEFAULT 0")
             elif check == "Yachts":
                 db.execute("ALTER TABLE userbio ADD pic1 text")
-                db.execute("ALTER TABLE userbio ADD like1 int DEFAULT 0")
+                db.execute("ALTER TABLE userbio ADD like1 INT DEFAULT 0")
             elif check == "Hotels":
                 db.execute("ALTER TABLE userbio ADD pic2 text")
-                db.execute("ALTER TABLE userbio ADD like2 int DEFAULT 0")
-
+                db.execute("ALTER TABLE userbio ADD like2 INT DEFAULT 0")
             elif check == "Watches":
                 db.execute("ALTER TABLE userbio ADD pic3 text")
-                db.execute("ALTER TABLE userbio ADD like3 int DEFAULT 0")
+                db.execute("ALTER TABLE userbio ADD like3 INT DEFAULT 0")
+
         for file in request.files.getlist("file"):
+            user = str(session["user_id"])
             print(file)
-            filename = file.filename
+            filename = user + "-" + str((secure_filename(file.filename)))
+            print(filename)
             destination = "/".join ([target,filename])
             print(destination)
             file.save(destination)
