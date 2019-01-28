@@ -46,49 +46,7 @@ def index():
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload():
-
-    if request.method == "POST":
-
-        check = request.form.get('select')
-        print(check)
-
-        if check == "Cars":
-            target = os.path.join(os.getcwd(), 'static/Image1/')
-            target_url = 'static/Image1'
-
-        elif check == "Yachts":
-            target = os.path.join(os.getcwd(), 'static/Image2/')
-            target_url = 'static/Image2'
-
-        elif check == "Hotels":
-            target = os.path.join(os.getcwd(), 'static/Image3/')
-            target_url = 'static/Image3'
-
-        elif check == "Watches":
-            target = os.path.join(os.getcwd(), 'static/Image4/')
-            target_url = 'static/Image4'
-
-        for file in request.files.getlist("file"):
-            print(file)
-            filename = file.filename
-            destination = "/".join ([target,filename])
-            print(destination)
-            file.save(destination)
-            tot_dest= "/".join([target_url,filename])
-            if check =="Cars":
-                db.execute("UPDATE userbio SET pic=:pic WHERE id=:id",id=session["user_id"], pic=tot_dest)
-            elif check =="Yachts":
-                db.execute("UPDATE userbio SET pic1=:pic1 WHERE id=:id",id=session["user_id"], pic1=tot_dest)
-            elif check =="Hotels":
-                db.execute("UPDATE userbio SET pic2=:pic2 WHERE id=:id",id=session["user_id"], pic2=tot_dest)
-            else:
-                db.execute("UPDATE userbio SET pic3=:pic3 WHERE id=:id",id=session["user_id"], pic3=tot_dest)
-
-        return redirect(url_for("index"))
-
-    else:
-        print("rendering")
-        return render_template("upload.html")
+    return upload0()
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -171,7 +129,6 @@ def register():
 @app.route("/top", methods=["GET", "POST"])
 @login_required
 def top():
-    update_total_likes()
     return draw_table()
 
 @app.route("/cats", methods=["GET", "POST"])
