@@ -5,27 +5,73 @@
 {% block main %}
 
 <div class="card card1" style="width: 35rem;">
-<h5 class="card-header">Settings</h5>
-  <div class="card-body">
-    <h5 class="card-title">Change password</h5>
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#password">Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#name">Username</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#bio">Biography</a>
+            </li>
+        </ul>
+    </div>
 
-    <form action="{{ url_for('settings') }}" method="POST">
-        <div class="form-group">
-            <label for="old_password"> Old password</label>
-            <input class="form-control" name="old_password" placeholder="Old password" type="password">
+    <div class="tab-content card-body">
+        <div id="password" class="tab-pane active">
+
+            <form action="{{ url_for('settings') }}" method="POST">
+                <div class="form-group">
+                    <label for="old_password"> Old password</label>
+                    <input class="form-control" name="old_password" placeholder="Old password" type="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password"> New password</label>
+                    <input class="form-control" name="new_password" placeholder="New password" type="password">
+                </div>
+
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-settings">Change</button>
+                </div>
+            </form>
+
         </div>
 
-        <div class="form-group">
-            <label for="new_password"> New password</label>
-            <input class="form-control" name="new_password" placeholder="New password" type="password">
+        <div id="name" class="tab-pane">
+
+            <form action="{{ url_for('settings') }}" method="POST">
+
+                <div class="form-group">
+                    <label for="new_username"> New username</label>
+                    <input class="form-control" name="new_username" placeholder="New username" type="text">
+                </div>
+
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-settings">Change</button>
+                </div>
+            </form>
+
         </div>
 
-        <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-settings">Change</button>
-        </div>
-    </form>
+        <div id="bio" class="tab-pane">
 
-  </div>
+            <form action="{{ url_for('settings') }}" method="POST">
+                <div class="form-group">
+                    <label for="new_bio"> New biography</label>
+                    <textarea class="form-control" name="new_bio" placeholder="New biography" rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-settings">Change</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
