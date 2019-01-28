@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 
-
 {% block title %} Upload {% endblock %}
 
 {% block main %}
@@ -20,7 +19,6 @@
             <p><h6>Choose category</h6></p>
             <div class="form-group">
                 <select class="custom-select mr-sm-2" name="select" method="POST">
-                    <option disabled selected value="">Category</option>
                       <option value="Cars">Cars</option>
                       <option value="Yachts">Yachts</option>
                       <option value="Watches">Watches</option>
@@ -28,9 +26,9 @@
                 </select>
             </div>
 
-            <p><h6>Tell us something about your picture...</h6></p>
+            <p><h6>Tell us something about your picture</h6></p>
             <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Description">
+                <input type="text" class="form-control" name="description" placeholder="Description">
             </div>
 
             <div class="form-group">
