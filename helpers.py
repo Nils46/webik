@@ -12,20 +12,6 @@ from functools import wraps
 
 db = SQL("sqlite:///database.db")
 
-def apology(message, code=400):
-    """Renders message as an apology to user."""
-    def escape(s):
-        """
-        Escape special characters.
-
-        https://github.com/jacebrowning/memegen#special-characters
-        """
-        for old, new in [("-", "--"), (" ", "-"), ("_", "__"), ("?", "~q"),
-                         ("%", "~p"), ("#", "~h"), ("/", "~s"), ("\"", "''")]:
-            s = s.replace(old, new)
-        return s
-    return render_template("apology.html", top=code, bottom=escape(message)), code
-
 def login_required(f):
     """
     Decorate routes to require login.
@@ -44,8 +30,6 @@ def categories():
 
     random.seed(datetime.today().day)
 
-
-
     categories = ["Cars", "Yachts", "Hotels", "Watches"]
     random_category = random.choice(categories)
     random_category_1 = random.choice(categories)
@@ -58,9 +42,11 @@ def names():
     account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
     name = account[0]["username"]
     return name
+
 def grinder0(): #if cat == "Hotels":
 
     random.seed(datetime.today().microsecond)
+    
     url = db.execute("SELECT pic FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic"]
@@ -124,6 +110,7 @@ def grinder1(): #if cat == "Hotels":
 def grinder2(): #if cat == "Hotels":
 
     random.seed(datetime.today().microsecond)
+    
     url = db.execute("SELECT pic2 FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic2"]
@@ -156,6 +143,7 @@ def grinder2(): #if cat == "Hotels":
 def grinder3(): #if cat == "Hotels":
 
     random.seed(datetime.today().microsecond)
+    
     url = db.execute("SELECT pic3 FROM userbio")
     send_url=(random.choice(url))
     url_choice=send_url["pic3"]
