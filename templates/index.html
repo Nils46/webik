@@ -36,39 +36,17 @@
     <img src="static/{{cats[2]}}" alt="{{cats[0]}}" class="image">
     <div class="overlay">
       <div class="text">#{{cats[0]}}</div>
-      {% if cats[0] == "Cars"%}
-      <a href="{{ url_for('grinder_car') }}" class="btn btn-light pic-btn">Go!</a>
-      {% endif %}
-      {% if cats[0] == "Yachts"%}
-      <a href="{{ url_for('grinder_yacht') }}" class="btn btn-light pic-btn">Go!</a>
-      {% endif %}
-      {% if cats[0] == "Hotels"%}
-      <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
-      {% endif %}
-      {% if cats[0] == "Watches"%}
-      <a href="{{ url_for('grinder_watch') }}" class="btn btn-light pic-btn">Go!</a>
-      {% endif %}
+      <a href="{{ url_for('cats') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
   </div>
 
-<div class="container">
+  <div class="container">
     <img src= "static/{{cats[3]}}" alt= {{cats[1]}} class="image" id="image">
     <div class="overlay">
-        <div class="text">#{{cats[1]}}</div>
-        {% if cats[1] == "Cars"%}
-        <a href="{{ url_for('grinder_car') }}" class="btn btn-light pic-btn">Go!</a>
-        {% endif %}
-        {% if cats[1] == "Yachts"%}
-        <a href="{{ url_for('grinder_yacht') }}" class="btn btn-light pic-btn">Go!</a>
-        {% endif %}
-        {% if cats[1] == "Hotels"%}
-        <a href="{{ url_for('grinder_hotel') }}" class="btn btn-light pic-btn">Go!</a>
-        {% endif %}
-        {% if cats[1] == "Watches"%}
-        <a href="{{ url_for('grinder_watch') }}" class="btn btn-light pic-btn">Go!</a>
-        {% endif %}
-        </div>
+      <div class="text">#{{cats[1]}}</div>
+      <a href="{{ url_for('cats') }}" class="btn btn-light pic-btn">Go!</a>
     </div>
+  </div>
 </div>
 
 {% else %}
@@ -82,7 +60,22 @@
 <div class="jumbotron jumbotron-fluid jumbotron-custom1">
     <div class="container1">
         <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
-        This ensures that relatively unkown photographers can achieve more exposure.</p>
+        This ensures that relatively unkown photographers can achieve more exposure. Our well-thought concept will prevent a snowball-effect from happening.</p>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom2">
+    <div class="container1">
+        <p class="lead1">How does Helios work?</p>
+    </div>
+</div>
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead">Every user is able to upload 1 picture in each category. You should only upload your best picture as the previous one
+                        will be overwritten when you uplaod a new one. When a user clicks on one of the categories, the user will see two pictures
+                        each time. The user has to decide which picture he likes the most. The photographer of the chosen picture will receive 1
+                        point. The more points a user has, the higher his position in the ranking.</p>
     </div>
 </div>
 
