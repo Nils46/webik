@@ -168,6 +168,7 @@ def grinder_hotel():
 @login_required
 def grinder_watch():
     return grinder3()
+
 @app.route("/logout")
 def logout():
     """Log user out."""
@@ -197,30 +198,61 @@ def settings():
 
     if request.method == "POST":
 
-        old_password = request.form.get("old_password")
-        new_password = request.form.get("new_password")
+        # change password
+        if request.form.get("old_password"):
 
-        if not old_password:
-            return apology("Fill in all fields")
-        elif not new_password:
-            return apology("Fill in all fields")
+            old_password = request.form.get("old_password")
+            new_password = request.form.get("new_password")
 
-        rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id = session["user_id"])
+            rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id = session["user_id"])
 
-        if len(rows) != 1 or not pwd_context.verify(request.form.get("old_password"), rows[0]['hash']):
-            return apology("Old password invalid")
+            if len(rows) != 1 or not pwd_context.verify(request.form.get("old_password"), rows[0]['hash']):
+                return apology("Old password invalid")
 
-        hash = pwd_context.hash(new_password)
+            hash = pwd_context.hash(new_password)
 
-        result = db.execute("UPDATE users SET hash = :hash", hash = hash)
+            result = db.execute("UPDATE users SET hash = :hash", hash = hash)
 
-        if not result:
-            return apology("Something went wrong")
+            # return index
+            cats = categories()
+            name = names()
 
-        cats = categories()
-        name = names()
+            return render_template("index.html", cats=cats, name=name)
 
-        return render_template("index.html", cats=cats, name=name)
+        # change username
+        elif request.form.get("new_username"):
+
+            new_username = request.form.get("new_username")
+
+            result = db.execute("UPDATE users SET username = :new_username WHERE id = :user_id", user_id = session["user_id"], new_username = new_username)
+
+            if not result:
+                return apology("Something went wrong")
+
+            # return index
+            cats = categories()
+            name = names()
+
+            return render_template("index.html", cats=cats, name=name)
+
+        # change bio
+        elif request.form.get("new_bio"):
+
+            new_bio = request.form.get("new_bio")
+
+            result = db.execute("UPDATE userbio SET bio = :new_bio WHERE id = :user_id", user_id = session["user_id"], new_bio = new_bio)
+
+            if not result:
+                return apology("Something went wrong")
+
+            # return index
+            cats = categories()
+            name = names()
+
+            return render_template("index.html", cats=cats, name=name)
+
+        else:
+            return render_template("apology.html", text="Is that everything?")
 
     else:
         return render_template("settings.html")
