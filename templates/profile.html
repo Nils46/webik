@@ -14,8 +14,6 @@
   </div>
 </div>
 
-
-
 <div class="jumbotron jumbotron-fluid jumbotron-custom2">
     <div class="container1">
         <p class="lead1">Most recent pictures</p>
@@ -27,34 +25,34 @@
     {% for image in pictures %}
 
     <div class="card" style="width: 19rem;">
-      <img src="{{ image.pic }}" class="card-img-top" alt="Cars">
+      <img src="{{ image.cars }}" class="card-img-top" alt="Cars">
       <div class="card-body">
         <p class="card-text">{{ desc }}</p>
-        <a href="{{ image.pic }}" class="btn btn-primary">Full size</a>
+        <a href="{{ image.cars }}" class="btn btn-primary">Full size</a>
       </div>
     </div>
 
     <div class="card" style="width: 19rem;">
-      <img src="{{ image.pic1 }}" class="card-img-top" alt="Cars">
+      <img src="{{ image.hotels }}" class="card-img-top" alt="Hotels">
       <div class="card-body">
         <p class="card-text">{{ desc }}</p>
-        <a href="{{ image.pic1 }}" class="btn btn-primary">Full size</a>
+        <a href="{{ image.hotels }}" class="btn btn-primary">Full size</a>
       </div>
     </div>
 
     <div class="card" style="width: 19rem;">
-      <img src="{{ image.pic2 }}" class="card-img-top" alt="Cars">
+      <img src="{{ image.yachts }}" class="card-img-top" alt="Yachts">
       <div class="card-body">
         <p class="card-text">{{ desc }}</p>
-        <a href="{{ image.pic2 }}" class="btn btn-primary">Full size</a>
+        <a href="{{ image.yachts }}" class="btn btn-primary">Full size</a>
       </div>
     </div>
 
     <div class="card" style="width: 19rem;">
-      <img src="{{ image.pic3 }}" class="card-img-top" alt="Cars">
+      <img src="{{ image.watches }}" class="card-img-top" alt="Watches">
       <div class="card-body">
         <p class="card-text">{{ desc }}</p>
-        <a href="{{ image.pic3 }}" class="btn btn-primary">Full size</a>
+        <a href="{{ image.watches }}" class="btn btn-primary">Full size</a>
       </div>
     </div>
 

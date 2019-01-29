@@ -114,12 +114,15 @@ def register():
 
 
         hash = pwd_context.hash(password)
-        entry = db.execute("Insert INTO users (username,hash, first_name, surname) VALUES(:username, :hash, :first_name, :surname)",
+        entry = db.execute("INSERT INTO users (username,hash, firstname, surname) VALUES(:username, :hash, :first_name, :surname)",
                            username=request.form.get("username"), hash=hash, first_name=request.form.get("first_name"), surname=request.form.get("surname"))
+
         if not entry:
-            return apology("Username already exists")
+            return render_template("apology.html", text="no")
 
         session["user_id"] = entry
+
+        db.execute("INSERT INTO pictures (id) VALUES (:id)", id=session["user_id"])
 
         return redirect(url_for("userbio"))
 
@@ -149,24 +152,24 @@ def userbio():
     else:
         return render_template("userbio.html", name=name)
 
-@app.route("/grinder_car", methods=["GET", "POST" ])
+@app.route("/Cars", methods=["GET", "POST" ])
 @login_required
-def grinder_car():
+def cars():
     return grinder0()
 
-@app.route("/grinder_yacht", methods=["GET", "POST" ])
+@app.route("/Yachts", methods=["GET", "POST" ])
 @login_required
-def grinder_yacht():
+def yachts():
     return grinder1()
 
-@app.route("/grinder_hotel", methods=["GET", "POST" ])
+@app.route("/Hotels", methods=["GET", "POST" ])
 @login_required
-def grinder_hotel():
+def hotels():
     return grinder2()
 
-@app.route("/grinder_watch", methods=["GET", "POST" ])
+@app.route("/Watches", methods=["GET", "POST" ])
 @login_required
-def grinder_watch():
+def watches():
     return grinder3()
 
 @app.route("/logout")
@@ -184,10 +187,11 @@ def logout():
 def profile():
 
     profile = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
-    pictures = db.execute("SELECT * FROM userbio WHERE id= :id", id=session["user_id"])
-    bio = db.execute("SELECT * FROM userbio WHERE id= :id", id=session["user_id"])
+    pictures = db.execute("SELECT * FROM pictures WHERE id= :id", id=session["user_id"])
+    bio = db.execute("SELECT bio FROM userbio WHERE id= :id", id=session["user_id"])
+
     userbio = bio[0]["bio"]
-    username = profile[0]["username"]
+    username = profile[0]["firstname"]
 
     # redirect user to login form
     return render_template("profile.html", username = username, userbio = userbio, pictures = pictures)

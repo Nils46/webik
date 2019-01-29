@@ -10,11 +10,42 @@
     </div>
 </div>
 
-{% if cat == "item1" %}
+{% if category == "cars" %}
 
 <div class="row">
   <div class="container">
-    <form action="{{ url_for('grinder_yacht') }}" method="POST">
+    <form action="{{ url_for('cars') }}" method="POST">
+    <img src="{{ url_choice }}" alt="" class="image">
+    <div class="overlay">
+      <input type="hidden" id="slider_input" name="Foto1" value="Ja" />
+      <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
+      <div class="text"></div>
+      <button class="btn btn-light pic-btn">Choose</button>
+      <a href="#" class="btn btn-success pic-btn-low">Profile</a>
+    </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <form action="{{ url_for('cars') }}" method="POST">
+    <img src="{{ url_choice_2 }}" alt="" class="image">
+    <div class="overlay">
+      <input type="hidden" id="slider_input" name="Foto2" value="Ja" />
+      <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
+      <div class="text"></div>
+      <button class="btn btn-light pic-btn">Choose</button>
+      <a href="#" class="btn btn-success pic-btn-low">Profile</a>
+    </div>
+    </form>
+  </div>
+</div>
+
+{% endif %}
+{% if category == "hotels" %}
+
+<div class="row">
+  <div class="container">
+    <form action="{{ url_for('hotels') }}" method="POST">
     <img src="{{ url_choice }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto3" value="Ja" />
@@ -27,7 +58,7 @@
   </div>
 
   <div class="container">
-    <form action="{{ url_for('grinder_yacht') }}" method="POST">
+    <form action="{{ url_for('hotels') }}" method="POST">
     <img src="{{ url_choice_2 }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto4" value="Ja" />
@@ -41,43 +72,12 @@
 </div>
 
 {% endif %}
-{% if cat == "item2" %}
 
-<div class="row">
-  <div class="container">
-    <form action="{{ url_for('grinder_yacht') }}" method="POST">
-    <img src="{{ url_choice }}" alt="" class="image">
-    <div class="overlay">
-      <input type="hidden" id="slider_input" name="Foto3" value="Ja" />
-      <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
-      <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
-      <a href="#" class="btn btn-success pic-btn-low">Profile</a>
-    </div>
-    </form>
-  </div>
-
-  <div class="container">
-    <form action="{{ url_for('grinder_yacht') }}" method="POST">
-    <img src="{{ url_choice_2 }}" alt="" class="image">
-    <div class="overlay">
-      <input type="hidden" id="slider_input" name="Foto4" value="Ja" />
-      <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
-      <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
-      <a href="#" class="btn btn-success pic-btn-low">Profile</a>
-    </div>
-    </form>
-  </div>
-</div>
-
-{% endif %}
-
-{% if cat == "item3" %}
+{% if category == "yachts" %}
 
 <div class ="row">
   <div class="container">
-    <form action="{{ url_for('grinder_hotel') }}" method="POST">
+    <form action="{{ url_for('yachts') }}" method="POST">
     <img src="{{ url_choice }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto5" value="Ja" />
@@ -90,7 +90,7 @@
   </div>
 
   <div class="container">
-    <form action="{{ url_for('grinder_hotel') }}" method="POST">
+    <form action="{{ url_for('yachts') }}" method="POST">
     <img src="{{ url_choice_2 }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto6" value="Ja" />
@@ -105,11 +105,11 @@
 
 {% endif %}
 
-{% if cat == "item4" %}
+{% if category == "watches" %}
 
 <div class="row">
   <div class="container">
-    <form action="{{ url_for('grinder_watch') }}" method="POST">
+    <form action="{{ url_for('watches') }}" method="POST">
     <img src="{{ url_choice }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto7" value="Ja" />
@@ -122,7 +122,7 @@
   </div>
 
   <div class="container">
-    <form action="{{ url_for('grinder_watch') }}" method="POST">
+    <form action="{{ url_for('watches') }}" method="POST">
     <img src="{{ url_choice_2 }}" alt="" class="image">
     <div class="overlay">
       <input type="hidden" id="slider_input" name="Foto8" value="Ja" />
