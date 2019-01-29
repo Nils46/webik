@@ -49,10 +49,8 @@ def grinder0(): #if category == "Cars":
 
     url = db.execute("SELECT cars FROM pictures")
     randomm = random.sample(url,2)
-    print(randomm)
     url_choice = randomm[0]["cars"]
     url_choice_2 = randomm[1]["cars"]
-    print(url_choice, url_choice_2)
 
     if url_choice == None:
         return grinder0()
@@ -79,6 +77,7 @@ def grinder1(): #if cat == "Yachts":
     url = db.execute("SELECT yachts FROM pictures")
     send_url=(random.choice(url))
     url_choice=send_url["yachts"]
+    print(url_choice)
     send_url_2=(random.choice(url))
     url_choice_2=send_url_2["yachts"]
 
@@ -107,7 +106,6 @@ def grinder2(): #if category == "Hotels":
     random.seed(datetime.today().microsecond)
 
     url = db.execute("SELECT hotels FROM pictures")
-    print(url)
     send_url=(random.choice(url))
     url_choice=send_url["hotels"]
     send_url_2=(random.choice(url))
@@ -175,6 +173,7 @@ def draw_table():
     data = dict(sorted(data.items(), key = lambda x:x[1], reverse=True)[0:10])
 
     return render_template("top.html", data=data)
+
 
 def upload0():
 

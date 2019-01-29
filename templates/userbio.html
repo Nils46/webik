@@ -1,21 +1,48 @@
 {% extends "layout.html" %}
 
-{% block title %}
-    Create bio
-{% endblock %}
+{% block title %} Edit profile {% endblock %}
 
 {% block main %}
-    <h1>Hello, {{name}}</h1>
 
-     <form action="{{ url_for('userbio') }}" method="post">
-         <fieldset>
-             <div class="form-group">
-             <textarea name="Text1" cols="40" rows="5"></textarea>
-             </div>
-             <div class="form-group">
+<div class="jumbotron jumbotron-fluid jumbotron-custom2">
+    <div class="container1">
+        <p class="lead1">Thanks for registering, {{name}}</p>
+    </div>
+</div>
+
+<div class="card card-upload" style="width: 35rem;">
+<h5 class="card-header">Upload</h5>
+  <div class="card-body">
+
+        <form id= "upload-form" action= "{{  url_for('userbio')  }}" method= "POST" enctype= "multipart/form-data">
+            <fieldset>
+
+            <p><h6>Tell us something about yourself</h6></p>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Text1" placeholder="Description">
+            </div>
+
+            <p><h6>Choose a local picture</h6></p>
+            <div class="custom-file">
+               <input type="file" class="custom-file-input" name="GIPHY" name= "file" accept="image/*" multiple>
+                 <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+
+            <div class="form-group">
                 <button class="btn btn-default" type="submit">Create!</button>
             </div>
+
          </fieldset>
     </form>
-{% endblock %}
 
+                <p><h6>Or search a Giphy in our database</h6></p>
+            <input id = "searchtext" type = "text" placeholder = "Search GIF">
+            <button id = "searchgifs" type = "submit" >PRESS</button>
+            <div class=inner></div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

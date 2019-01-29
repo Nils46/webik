@@ -6,7 +6,7 @@
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom2">
     <div class="container1">
-        <p class="lead1">Ranking</p>
+        <p class="lead1">Following</p>
     </div>
 </div>
 
@@ -14,14 +14,12 @@
     <thead class="thead">
         <tr>
           <th scope="col">User</th>
-          <th scope="col">Points</th>
         </tr>
     </thead>
         <tbody>
-            {% for key, value in data.items() %}
+            {% for f in following%}
            <tr>
-                <th> {{ key }} </th>
-                <td> {{ value }} </td>
+                <td> {{f}} </td>
            </tr>
             {% endfor %}
         </tbody>

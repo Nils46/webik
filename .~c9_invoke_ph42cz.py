@@ -5,8 +5,7 @@ from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 import os
 import random
-import urllib,json
-from urllib import request
+
 from helpers import *
 
 # configure application
@@ -144,35 +143,12 @@ def cats():
 def userbio():
 
     cats = categories()
-
-    username = db.execute("SELECT firstname FROM users WHERE id= :id", id=session["user_id"])
-    name = username[0]["firstname"]
+    name = names()
 
     if request.method == "POST":
-
-        username = db.execute("SELECT firstname FROM users WHERE id= :id", id=session["user_id"])
-        name = username[0]["firstname"]
-
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
 
-        target = os.path.join(os.getcwd(), 'static/GIPHY/')
-        target_url = 'static/GIPHY'
-
-        for file in request.files.getlist("GIPHY"):
-
-            user = str(session["user_id"])
-
-            filename = user + "-" + str(file.filename)
-
-            destination = "/".join([target,filename])
-            file.save(destination)
-
-            tot_dest= "/".join([target_url,filename])
-
-            db.execute("UPDATE userbio SET profilepicture = :tot_dest WHERE id = :id", id=session["user_id"], tot_dest = tot_dest)
-
         return render_template("index.html", cats=cats, name=name)
-
     else:
         return render_template("userbio.html", name=name)
 
