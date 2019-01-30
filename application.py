@@ -281,18 +281,21 @@ def settings():
 def follow():
 
     id_following = request.form.get("follow")
-    print(id_following)
 
     check = db.execute("SELECT idfollowing FROM following WHERE id=:id", id=session["user_id"])
 
+    following = []
+
     for c in check:
-        if c["idfollowing"] == id_following:
-            continue
-        else:
-            return apology("already following")
+        follower = c.get("idfollowing")
+        following.append(follower)
+
+    for f in following:
+        if f == id_following:
+            return apology("You already follow this user")
 
     name_following1= db.execute("SELECT username FROM users WHERE id=:id", id=id_following)
-    print(name_following1)
+
     name_following = name_following1[0]["username"]
 
     db.execute("INSERT INTO following (id, idfollowing, name_following) VALUES (:id, :id_following, :name_following)", id=session["user_id"], id_following = id_following, name_following=name_following)
@@ -310,9 +313,12 @@ def following():
     following=[]
 
     for f in following1:
-        following.append(f["idfollowing"])
+        user = f["idfollowing"]
+        name = db.execute ("SELECT firstname FROM users WHERE id = :id", id=user)
+        firstname = name[0]["firstname"]
+        following.append((f["idfollowing"],firstname))
 
-    return render_template("following.html", following=following, name=name)
+    return render_template("following.html", following=following)
 
 
 @app.route("/user_profile", methods=["GET", "POST"])
