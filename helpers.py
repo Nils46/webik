@@ -169,8 +169,19 @@ def draw_table():
         data.update({key:value})
 
     data = dict(sorted(data.items(), key = lambda x:x[1], reverse=True)[0:10])
-
-    return render_template("top.html", data=data)
+    datalist=[]
+    check=False
+    for d in data:
+        if check==False:
+            datalist.append(d)
+            check=True
+    idlist=db.execute("SELECT id FROM users WHERE username=:username", username=datalist)
+    ide=(idlist[0]["id"])
+    likesdict=db.execute("SELECT amount FROM likes WHERE id=:id", id=ide)
+    likes=likesdict[0]["amount"]
+    picurldict=db.execute("SELECT link FROM likes WHERE id=:id AND amount=:amount", id=ide, amount=likes)
+    picurl=picurldict[0]["link"]
+    return render_template("top.html", data=data, picurl=picurl)
 
 
 def upload0():
