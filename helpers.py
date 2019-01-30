@@ -199,13 +199,19 @@ def draw_table():
         if check==False:
             datalist.append(d)
             check=True
+
     idlist=db.execute("SELECT id FROM users WHERE username=:username", username=datalist)
     ide=(idlist[0]["id"])
     likesdict=db.execute("SELECT amount FROM likes WHERE id=:id", id=ide)
     likes=likesdict[0]["amount"]
     picurldict=db.execute("SELECT link FROM likes WHERE id=:id AND amount=:amount", id=ide, amount=likes)
     picurl=picurldict[0]["link"]
-    return render_template("top.html", data=data, picurl=picurl)
+
+    names = db.execute("SELECT firstname, surname FROM users where id = :user_id", user_id=ide)
+    firstname = names[0]["firstname"]
+    surname = names[0]["surname"]
+
+    return render_template("top.html", data=data, picurl=picurl, likes = likes, user_id = ide, firstname = firstname, surname = surname)
 
 # photo that has been uploaded is saved in database with the data: which user uploaded it and which categorie is belongs to.
 
