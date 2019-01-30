@@ -137,13 +137,8 @@ def grinder2(): #if category == "Hotels":
         if request.method == "POST":
             if request.form.get("Foto3") == "Ja":
                 link= request.form.get("link1")
-<<<<<<< HEAD
-                db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link=link)
-            elif request.form.get("Foto6") == "Ja":
-=======
                 db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link = link)
             elif request.form.get("Foto4") == "Ja":
->>>>>>> 6914c2bdfc3d35d8ce0eceb9efdb7758c166d885
                 link= request.form.get("link2")
                 db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link=link)
 

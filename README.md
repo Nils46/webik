@@ -1,126 +1,72 @@
-## Technisch ontwerp
+Helios
+------
 
-[https://webik.mprog.nl/project/technisch-ontwerp](https://webik.mprog.nl/project/technisch-ontwerp) Je hebt een voorstel gemaakt en aangepast, en nu is het tijd om te gaan puzzelen hoe je website past in het Flask-framework. Je hebt inmiddels wat ervaring opgedaan met dat framework, dus je weet dat MVC hier een belangrijke rol speelt (zie Lecture 8).
+IK14
 
-### Controllers
+Boudewijn Welkzijn, Nils Böhne en Kjeld Roos
+--------------------------------------------
 
-In Flask werk je standaard met één controller, namelijk application.py. Hierin worden diverse functies gedefinieerd, die elk een bepaalde “route” afhandelen. Je kunt nu al goed voorspellen welke pagina’s je gaat maken: veel heb je al uitgetekend in je proposal.
+Helios is een photo-sharing website, waar het om de foto's draait.
 
-Er zijn ook routes die niet aan een scherm gekoppeld zijn. Soms heb je een route die er voor dient om een formulier te verwerken. Deze route zal eindigen met een redirect naar een andere route.
+![](https://lh4.googleusercontent.com/W6GoI11TrVzYyR_dNsDVR7pVLihcUmC-fRSHOPnPOpyF82EKn8LfJM576xeNxTkWDEwvKHTsnq-1F2DpRWp0eMPRcKn-a4NE4DVJa2rNQ2Ev-arAj-_gYznTBiaI0AoLqc3dBg1e)
 
-- index-n 
-- login-k 
-- logout 
-- register-k 
-- login index-n 
-- per categorie een soort Grinder page 
-- top 10(indien tijd over) 
-- layout.html  
-- gelikte fotos-b 
-- user bio-b 
-- instellingen-b 
-- change password 
-  
-  
+Foto 1: Index pagina als je ingelogd bent.
 
-### Views
+Features
+--------
 
-Als je gaat nadenken over de controllers, zal waarschijnlijk blijken dat er nog schermen ontbreken in je projectvoorstel. Nu is het moment om dat uit te breiden.
+-   Inloggen
 
-  
+-   Uitloggen
 
-Foto 1: Login page and Register page![Image](https://lh5.googleusercontent.com/aIGb_jQrAYZMDTgx2ZojD7ZP1SFTWrDFNU9hFMBD1yrAjyMPww59BW7EZmKqfivOu51zXp5ET1-z8KDAvGFAZOIcHZvBbqU-4yznfODew2MUK3HfSSaf8TOEoNDBaaxyV9GOarCF)
+-   Registreren
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+-   Username, password en biography veranderen
 
-Foto 2: Per hashtag kies je uit twee foto’s welke het mooiste is.
+-   Elke user kan een profielfoto of profiel-gifje uploaden
 
-  
-![Image](https://lh4.googleusercontent.com/ybpPDs3YJFqFL8bkY6qMuEVebw2Xbc9YUctiUmi8XqcIpoIfOc_Ftrz9O16SI4wP3wF3UHIfLZxZoywUhAmi9gBq73JJ0NrkMXrj97VqncpyfZaOAHyYRFf4UHmM5XyIueivVoGt)  
-  
-![Image](https://lh6.googleusercontent.com/Eox6YoUNU36FaodnuM1C9iCDzEbB-1ZQm1LZ8dfxRYVm0aGWonrZBP0vHwqWIdc9FKHMbTLR9TqzcoVHZrRlooONqXbjmAQi5s1hO5n-WT0Do6fsROtf3cXMLf2bMOJT5IWvMsyL)  
-  
-  
+-   Elke user kan bij elke categorie een foto uploaden.
 
-### Foto 3: Change Password
+-   Elke user kan bekijken wie hem/haar volgt
 
-  
-  
-  
-  
-![Image](https://lh3.googleusercontent.com/wIET4loTKLd0csKAbu50pZ6FdKwBoO8Rm94Myq12qTpemdcsBhm155nU345FH8SgePSiONOwFZcDi4aY9rmXUIxZgUJD6oNaP-XZ3UH2vIWL4FVi8-XkjFwXe8C31iukShCo3oZa)  
-  
-  
-  
-  
-  
+-   Je kan als user elke volger ook ontvolgen
 
-### Foto 4: Settings
+-   Ranglijst met de meest gelikete users
 
-  
-  
+-   Eigen profiel en die van anderen bekijken
 
-Foto 5: Index
+-   Bij elke profiel kan je de meest recente foto's bekijken
 
-  
-  
+-   Wachtwoorden worden gehasht
 
-Foto 6: Top 10
+-   Wachtwoorden bij login weergeven
 
-  
-  
-  
+Wegwijs door de repository
+--------------------------
 
-Foto 7: Gelikete Foto’s
+-   In het mapje static staat alle stijl, foto's en javascript files
 
-  
-  
+-   In het mapje static/GIPHY staan alle profielfoto's
 
-Foto 8: Change Password
+-   In de mapjes static/Hotels, static/Yachts, static/Cars en static/Watches staan alle foto's in van die categorie
 
-### Models/helpers
+-   In mapje static/JS zitten alle javascript bestanden
 
-In CS50 Finance schrijf je zelf de SQL-queries direct in de functies van de controller. Dat kun je nu ook weer doen. Mocht je ergens een stuk ingewikkelde code nodig hebben, dan heeft het wellicht zin om daar een aparte Python-module van te maken die je dan import in de controller. Ook kan het zijn dat je bepaalde functies vaak nodig hebt, zoals apology() en usd() in de helpers.py van CS50 Finance.
+-   In static/styles.css zit al onze stijl
 
-apology() 
+-   In het mapje templates zitten al onze html bestanden
 
-dark mode()
+-   In het bestand templates/layout.html staat de code van de navbar en alle source code files.
 
-delete all foto’s()
+-   In het bestand 'helpers.py' staan alle functies, die regelmatig worden gebruikt in application.py.
 
-login required()
+-   In het bestand 'application.py' wordt de application geïnitialiseerd met alle routing-processen.
 
-foto opzoek functie()
+Verdeling van werk
+------------------
 
-  
-  
+Boudewijn heeft zich in eerste instantie gericht op het aanmaken van de beginnende structuur van de website en aan het veranderen van je password. Daarna de API werkend maken etc. met behulp van Nils. Daarna heef
 
-### Plugins en frameworks
+Kjeld heeft aan de ranking functie gewerkt. Ook heeft hij aan het volgen van users gewerkt.  Ook heeft hij zich gericht op de grinder page, het uploaden van foto's en de databasestructuur gewerkt.
 
-Wil je plugins voor Flask gebruiken of een framework zoals Bootstrap? Dat moet nu ook vastgelegd worden in het ontwerpdocument. Dan weet je wat je nog moet uitzoeken.
-
-  
-
-Flask: http://flask.pocoo.org/docs/1.0/tutorial/
-
-Bootstrap: https://www.w3schools.com/bootstrap4/
-
-  
-
-### Submit
-
-Je ontwerpdocument en aangepaste voorstel (en de plaatjes!) moeten op de website GitHub terecht komen. Voor informatie over het maken van je repository, zie [hier](https://webik.mprog.nl/project/repository). Zodra de repository helemaal goed is, stuur je hieronder een link in naar de juiste URL. Deze ziet er als volgt uit:
-
-https://github.com/&lt;gebruikersnaam&gt;/&lt;reponaam&gt;
+Nils heeft voornamelijk aan de stijl van onze website gewerkt. Hij heeft met Kjeld gewerkt aan de ranking functie en de databasestructuur. Later richtte hij zich op de profielpagina van de user.
