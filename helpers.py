@@ -37,12 +37,6 @@ def categories():
 
     return random_category, random_category_1, url, url1
 
-def names():
-
-    account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
-    name = account[0]["username"]
-    return name
-
 def grinder0(): #if category == "Cars":
 
     random.seed(datetime.today().microsecond)
@@ -82,11 +76,11 @@ def grinder1(): #if cat == "Yachts":
     url_choice_2=send_url_2["yachts"]
 
     if url_choice == None:
-        return grinder2()
+        return grinder1()
     elif url_choice_2 == None:
-        return grinder2()
+        return grinder1()
     elif url_choice == url_choice_2:
-        return grinder2()
+        return grinder1()
 
     else:
         if request.method == "POST":
@@ -112,11 +106,11 @@ def grinder2(): #if category == "Hotels":
     url_choice_2=send_url_2["hotels"]
 
     if url_choice == None:
-        return grinder1()
+        return grinder2()
     elif url_choice_2 == None:
-        return grinder1()
+        return grinder2()
     elif url_choice == url_choice_2:
-        return grinder1()
+        return grinder2()
 
     else:
         if request.method == "POST":
@@ -248,3 +242,13 @@ def upload0():
     else:
 
         return render_template("upload.html")
+
+def categorieconverter(cats):
+    if cats =="Cars":
+        return "/cars"
+    elif cats =="Yachts":
+        return "/yachts"
+    elif cats =="Hotels":
+        return "/hotels"
+    elif cats =="Watches":
+        return "/watches"

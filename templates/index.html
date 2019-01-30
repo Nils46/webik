@@ -8,7 +8,7 @@
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
     <div class="container1">
-        <h1 class="display-3">Welcome back, {{name}}!</h1>
+        <h1 class="display-3">Welcome back, {{firstname}}!</h1>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
 <div class="jumbotron jumbotron-fluid jumbotron-custom">
     <div class="container1">
         <h1 class="display-3">Welcome on Helios!</h1>
-        <a href="{{ url_for('register') }}" class="btn btn-success">Register now!</a>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Register now!</a>
     </div>
 </div>
 
@@ -54,30 +54,23 @@
 <div class="jumbotron jumbotron-fluid jumbotron-custom2">
     <div class="container1">
         <p class="lead1">Why should you use Helios?</p>
+        <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
+        This ensures that relatively unkown photographers can achieve more exposure.
+        Our well-thought concept will prevent a snowball-effect from happening.</p>
     </div>
 </div>
 
-<div class="jumbotron jumbotron-fluid jumbotron-custom1">
-    <div class="container1">
-        <p class="lead">Helios is not just a photo-sharing website. On Helios it's all about the photo. The photographer comes in second place.
-        This ensures that relatively unkown photographers can achieve more exposure. Our well-thought concept will prevent a snowball-effect from happening.</p>
-    </div>
-</div>
 
 <div class="jumbotron jumbotron-fluid jumbotron-custom2">
     <div class="container1">
         <p class="lead1">How does Helios work?</p>
-    </div>
-</div>
-
-<div class="jumbotron jumbotron-fluid jumbotron-custom1">
-    <div class="container1">
         <p class="lead">Every user is able to upload 1 picture in each category. You should only upload your best picture as the previous one
-                        will be overwritten when you uplaod a new one. When a user clicks on one of the categories, the user will see two pictures
+                        will be overwritten when you upload a new one. When a user clicks on one of the categories, the user will see two pictures
                         each time. The user has to decide which picture he likes the most. The photographer of the chosen picture will receive 1
                         point. The more points a user has, the higher his position in the ranking.</p>
     </div>
 </div>
+
 
 {% endif %}
 

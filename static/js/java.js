@@ -12,9 +12,11 @@ function getData(){
 
         var respond = response.data
 
+        $('.inner').html('');
+
         for (i in respond)
         {
-            $('.inner').append("<img src= '"+respond[i].images.original.url+"' style='height: 10%; width: 10%;'/>")
+            $('.inner').append("<img src= '"+respond[i].images.original.url+"' style='height: 200px; width: 200px;'/>")
 
             }
                     });

@@ -36,13 +36,17 @@ db = SQL("sqlite:///database.db")
 def index():
 
     cats = categories()
+    cat = categorieconverter(cats[0])
+    cat1 = categorieconverter(cats[1])
 
     if session.get("user_id") is None:
         return render_template("index.html", cats = cats)
 
     else:
-        name = names()
-        return render_template("index.html", cats = cats, name = name)
+        account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
+        firstname = account[0]["firstname"]
+        print(firstname)
+        return render_template("index.html", firstname = firstname, cats = cats, cat = cat, cat1 = cat1)
 
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
@@ -78,10 +82,7 @@ def login():
         session["user_id"] = rows[0]["id"]
         # redirect user to home page
 
-        cats = categories()
-        name = names()
-
-        return render_template("index.html", cats=cats, name=name)
+        return redirect(url_for("index"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -171,7 +172,7 @@ def userbio():
 
             db.execute("UPDATE userbio SET profilepicture = :tot_dest WHERE id = :id", id=session["user_id"], tot_dest = tot_dest)
 
-        return render_template("index.html", cats=cats, name=name)
+        return redirect(url_for("index"))
 
     else:
         return render_template("userbio.html", name=name)
@@ -210,15 +211,20 @@ def logout():
 @login_required
 def profile():
 
-    profile = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
+    profilepic = db.execute("SELECT profilepicture FROM userbio WHERE id=:id", id=session["user_id"])
+    profilepicture = profilepic[0]["profilepicture"]
     pictures = db.execute("SELECT * FROM pictures WHERE id= :id", id=session["user_id"])
     bio = db.execute("SELECT bio FROM userbio WHERE id= :id", id=session["user_id"])
-
     userbio = bio[0]["bio"]
-    username = profile[0]["firstname"]
+
+    account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
+    firstname = account[0]["firstname"]
+    surname = account[0]["surname"]
+    username = account[0]["username"]
 
     # redirect user to login form
-    return render_template("profile.html", username = username, userbio = userbio, pictures = pictures)
+    return render_template("profile.html", userbio = userbio, pictures = pictures, profilepicture = profilepicture
+                            , firstname = firstname, surname = surname, username = username)
 
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
@@ -242,10 +248,7 @@ def settings():
             result = db.execute("UPDATE users SET hash = :hash", hash = hash)
 
             # return index
-            cats = categories()
-            name = names()
-
-            return render_template("index.html", cats=cats, name=name)
+            return redirect(url_for("profile"))
 
         # change username
         elif request.form.get("new_username"):
@@ -258,10 +261,7 @@ def settings():
                 return apology("Something went wrong")
 
             # return index
-            cats = categories()
-            name = names()
-
-            return render_template("index.html", cats=cats, name=name)
+            return redirect(url_for("profile"))
 
         # change bio
         elif request.form.get("new_bio"):
@@ -274,10 +274,7 @@ def settings():
                 return apology("Something went wrong")
 
             # return index
-            cats = categories()
-            name = names()
-
-            return render_template("index.html", cats=cats, name=name)
+            return redirect(url_for("profile"))
 
         else:
             return render_template("apology.html", text="Is that everything?")
@@ -304,16 +301,24 @@ def user_profile():
 
     return render_template("user_profile.html", bio = bio, username = username, firstname = firstname, surname = surname, user_id = user_id)
 
-
 @app.route("/follow", methods=["GET", "POST"])
 @login_required
 def follow():
 
-    follow = (request.form.get("follow"))
-
     id_following = request.form.get("follow")
 
-    db.execute("INSERT INTO following (id, idfollowing) VALUES (:id, :id_following)", id=session["user_id"], id_following = id_following)
+    check=db.execute("SELECT idfollowing FROM following WHERE id=:id", id=session["user_id"])
+    for c in check:
+        if c["idfollowing"] == id_following:
+            continue
+        else:
+            return apology("already following")
+    name_following1= db.execute("SELECT username FROM users WHERE id=:id", id=id_following)
+
+
+    name_following=name_following1[0]["username"]
+
+    db.execute("INSERT INTO following (id, idfollowing, name_following) VALUES (:id, :id_following, :name_following)", id=session["user_id"], id_following = id_following, name_following=name_following)
 
     return redirect(url_for("following"))
 
@@ -333,3 +338,28 @@ def following():
         following.append(f["idfollowing"])
 
     return render_template("following.html", following=following, name=name, userbio=userbio)
+
+@app.route("/user_profile_sett", methods=["GET", "POST"])
+@login_required
+def user_profile_sett():
+    if request.method == "POST":
+        name=request.form.get("name")
+        user = db.execute("SELECT id FROM users WHERE username = :name", name = name)
+        user_id = user[0]["id"]
+        biography = db.execute("SELECT bio FROM userbio WHERE id = :user", user = user_id)
+        bio = biography[0]["bio"]
+        names = db.execute("SELECT * FROM users WHERE id = :user", user = user_id)
+        username = name
+        firstname = names[0]["firstname"]
+        surname = names[0]["surname"]
+
+        return render_template("user_profile_sett.html", bio = bio, username = username, firstname = firstname, surname = surname, id = user_id)
+
+@app.route("/unfollow", methods=["GET", "POST"])
+@login_required
+def unfollow():
+    if request.method == "POST":
+        name=request.form.get("unfollow")
+        db.execute("DELETE FROM following WHERE idfollowing=:name", name=name)
+
+        return redirect(url_for("following"))

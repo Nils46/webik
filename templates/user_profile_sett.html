@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} User Profile {% endblock %}
+
+{% block main %}
+
+
+<div class="card" style="width: 35rem;">
+<h5 class="card-header">{{username}}</h5>
+  <div class="card-body">
+    <img src="{{ url_for('static', filename = 'shrek.gif')}}" class="profile-pic">
+    <h5 class="card-title">Hi there, {{firstname}} {{surname}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{bio}}</h6>
+
+    <form action="{{ url_for('unfollow')}}" method= "POST">
+      <input type="hidden" id="test" name="unfollow" value="{{ username }}">
+      <button class="btn btn-success btn-follow">Unfollow</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

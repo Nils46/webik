@@ -4,13 +4,15 @@
 
 {% block main %}
 
-<div class="jumbotron jumbotron-fluid jumbotron-custom2">
+{% if category == "cars" %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
     <div class="container1">
-        <p class="lead1">Select your favourite image</p>
+        <p class="lead1">#Cars</p>
+        <p class="lead">You can only like one image each time. After you have liked an image you will see two new random images.</p>
+        <p class="lead">You are also able to view the photographers profile by clicking on profile when hovering over the image.</p>
     </div>
 </div>
-
-{% if category == "cars" %}
 
 <div class="row">
   <div class="container">
@@ -20,11 +22,11 @@
       <input type="hidden" id="slider_input" name="Foto1" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
        </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
     </form>
@@ -37,18 +39,27 @@
       <input type="hidden" id="slider_input" name="Foto2" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice_2 }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
 </div>
 
 {% endif %}
+
 {% if category == "hotels" %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead1">#Hotels</p>
+        <p class="lead">You can only like one image each time. After you have liked an image you will see two new random images.</p>
+        <p class="lead">You are also able to view the photographers profile by clicking on profile when hovering over the image.</p>
+    </div>
+</div>
 
 <div class="row">
   <div class="container">
@@ -58,11 +69,11 @@
       <input type="hidden" id="slider_input" name="Foto3" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
@@ -74,11 +85,11 @@
       <input type="hidden" id="slider_input" name="Foto4" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice_2 }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
@@ -88,6 +99,14 @@
 
 {% if category == "yachts" %}
 
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead1">#Yachts</p>
+        <p class="lead">You can only like one image each time. After you have liked an image you will see two new random images.</p>
+        <p class="lead">You are also able to view the photographers profile by clicking on profile when hovering over the image.</p>
+    </div>
+</div>
+
 <div class ="row">
   <div class="container">
     <form action="{{ url_for('yachts') }}" method="POST">
@@ -96,11 +115,11 @@
       <input type="hidden" id="slider_input" name="Foto5" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
@@ -112,11 +131,11 @@
       <input type="hidden" id="slider_input" name="Foto6" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice_2 }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
@@ -126,6 +145,14 @@
 
 {% if category == "watches" %}
 
+<div class="jumbotron jumbotron-fluid jumbotron-custom1">
+    <div class="container1">
+        <p class="lead1">#Watches</p>
+        <p class="lead">You can only like one image each time. After you have liked an image you will see two new random images.</p>
+        <p class="lead">You are also able to view the photographers profile by clicking on profile when hovering over the image.</p>
+    </div>
+</div>
+
 <div class="row">
   <div class="container">
     <form action="{{ url_for('watches') }}" method="POST">
@@ -134,11 +161,11 @@
       <input type="hidden" id="slider_input" name="Foto7" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link1" value="{{ url_choice }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
      </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>
@@ -150,11 +177,11 @@
       <input type="hidden" id="slider_input" name="Foto8" value="Ja" />
       <input type="hidden" id="ishmooiman" name="link2" value="{{ url_choice_2 }}">
       <div class="text"></div>
-      <button class="btn btn-light pic-btn">Choose</button>
+      <button class="btn btn-light pic-btn-high"><span class="fas fa-heart"></span>Like</button>
       </form>
       <form action="{{ url_for('user_profile')}}" method= "POST">
       <input type="hidden" id="test" name="follow" value="{{ url_choice_2 }}">
-      <button class="btn btn-success pic-btn-low">Profile</button>
+      <button class="btn btn-light pic-btn-low"><span class="fas fa-user-circle"></span>Profile</button>
       </form>
     </div>
   </div>

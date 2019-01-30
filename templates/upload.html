@@ -9,15 +9,14 @@
   <div class="card-body">
     <form id= "upload-form" action= "{{  url_for('upload')  }}" method= "POST" enctype= "multipart/form-data">
         <fieldset>
-
-            <p><h6>Choose file</h6></p>
+            <h6>Select a file</h6>
              <div class="custom-file">
                <input type="file" class="custom-file-input" id="customFile" name= "file" accept="image/*" multiple>
                  <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
 
-            <p><h6>Choose category</h6></p>
-            <div class="form-group">
+            <p><h6>Choose a category</h6></p>
+            <div class="form-group form1">
                 <select class="custom-select mr-sm-2" name="select" method="POST">
                       <option value="Cars">Cars</option>
                       <option value="Yachts">Yachts</option>
@@ -26,14 +25,8 @@
                 </select>
             </div>
 
-            <p><h6>Tell us something about your picture</h6></p>
-            <div class="form-group">
-                <input type="text" class="form-control" name="description" placeholder="Description">
-            </div>
+                <button class="btn btn-light btn-settings" type="submit">Upload</button>
 
-            <div class="form-group">
-                <button class="btn btn-success btn-upload" type="submit">Upload</button>
-            </div>
         </fieldset>
     </form>
 

@@ -19,7 +19,8 @@
         <tbody>
             {% for f in following%}
            <tr>
-                <td> {{f}} </td>
+            <td></form><form action="{{ url_for('user_profile_sett')}}" method= "POST"><input type="hidden" id="test" name="name" value="{{f}}"><button>{{f}}</button></form></td>
+
            </tr>
             {% endfor %}
         </tbody>
