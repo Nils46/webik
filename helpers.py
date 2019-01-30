@@ -11,6 +11,10 @@ from functools import wraps
 
 db = SQL("sqlite:///database.db")
 
+def apology(message):
+
+    return render_template("apology.html", message = message)
+
 def login_required(f):
     """
     Decorate routes to require login.

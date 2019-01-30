@@ -10,10 +10,10 @@
     </div>
 </div>
 
-<div class="card card-upload" style="width: 35rem;">
-<h5 class="card-header">Upload</h5>
+<div class="card card-userbio" style="width: 35rem;">
   <div class="card-body">
 
+        <h6 class="card-subtitle mb-2 text-muted">Please note that nothing is required</h6>
         <form id= "upload-form" action= "{{  url_for('userbio')  }}" method= "POST" enctype= "multipart/form-data">
             <fieldset>
 
@@ -23,22 +23,27 @@
             </div>
 
             <p><h6>Choose a local picture</h6></p>
+            <div class="searchgif">
             <div class="custom-file">
                <input type="file" class="custom-file-input" name="GIPHY" name= "file" accept="image/*" multiple>
                  <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
-
-            <div class="form-group">
-                <button class="btn btn-light btn-settings" type="submit">Create!</button>
             </div>
 
+                <button class="btn btn-light btn-settings" type="submit">Create!</button>
          </fieldset>
     </form>
 
     <p><h6>Or search a Giphy in our database</h6></p>
-    <p>You have to save and upload the file</p>
-    <input id = "searchtext" type = "text" placeholder = "Example: Shrek">
-    <button id = "searchgifs" type = "submit" >Search</button>
+    <p><h6 class="card-subtitle mb-2 text-muted">You have to save and upload the gif in the form above</h6></p>
+
+    <div class ="searchgif">
+        <div class="form-group">
+            <input type = "text" class="form-control" id = "searchtext" placeholder = "Example: Shrek">
+        </div>
+
+            <button class="btn btn-light btn-settings" id="searchgifs" type="submit">Search!</button>
+    </div>
     <div class=inner></div>
 
     </div>

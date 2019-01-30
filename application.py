@@ -65,18 +65,18 @@ def login():
 
         # ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username")
+            return apology("You muust provide your username")
 
         # ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password")
+            return apology("You must provide your password")
 
         # query database for username
         rows = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
 
         # ensure username exists and password is correct
         if len(rows) != 1 or not pwd_context.verify(request.form.get("password"), rows[0]["hash"]):
-            return apology("invalid username and/or password")
+            return apology("Invalid username and/or password")
 
         # remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -100,27 +100,24 @@ def register():
         confirmation = request.form.get("confirmation")
         # check if username was given
         if not username:
-            return apology("must provide username")
+            return apology("You must provide a username")
 
         # check if password was given
         elif not password:
-            return apology("must provide password")
+            return apology("You must provide a password")
         elif not confirmation:
-            return apology("must provide password once more")
+            return apology("You must provide a password once more")
         elif password != confirmation:
-            return apology("Passwords didn`t match")
+            return apology("Passwords did not match")
         elif not first_name:
-            return apology("must provide first name")
+            return apology("You must provide your first name")
         elif not surname:
-            return apology("must provide surname")
+            return apology("You must provide your surname")
 
 
         hash = pwd_context.hash(password)
         entry = db.execute("INSERT INTO users (username,hash, firstname, surname) VALUES(:username, :hash, :first_name, :surname)",
                            username=request.form.get("username"), hash=hash, first_name=request.form.get("first_name"), surname=request.form.get("surname"))
-
-        if not entry:
-            return render_template("apology.html", text="no")
 
         session["user_id"] = entry
 
@@ -223,8 +220,8 @@ def profile():
     username = account[0]["username"]
 
     # redirect user to login form
-    return render_template("profile.html", userbio = userbio, pictures = pictures, profilepicture = profilepicture
-                            , firstname = firstname, surname = surname, username = username)
+    return render_template("profile.html", userbio = userbio, pictures = pictures, profilepicture = profilepicture,
+                            firstname = firstname, surname = surname, username = username)
 
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
@@ -276,47 +273,27 @@ def settings():
             # return index
             return redirect(url_for("profile"))
 
-        else:
-            return render_template("apology.html", text="Is that everything?")
-
     else:
         return render_template("settings.html")
-
-@app.route("/user_profile",  methods=["GET", "POST"])
-@login_required
-def user_profile():
-
-    link = request.form.get("follow")
-
-    user = db.execute("SELECT id FROM likes WHERE link = :link", link = link)
-    user_id = user[0]["id"]
-
-    biography = db.execute("SELECT bio FROM userbio WHERE id = :user", user = user_id)
-    bio = biography[0]["bio"]
-
-    names = db.execute("SELECT * FROM users WHERE id = :user", user = user_id)
-    username = names[0]["username"]
-    firstname = names[0]["firstname"]
-    surname = names[0]["surname"]
-
-    return render_template("user_profile.html", bio = bio, username = username, firstname = firstname, surname = surname, user_id = user_id)
 
 @app.route("/follow", methods=["GET", "POST"])
 @login_required
 def follow():
 
     id_following = request.form.get("follow")
+    print(id_following)
 
-    check=db.execute("SELECT idfollowing FROM following WHERE id=:id", id=session["user_id"])
+    check = db.execute("SELECT idfollowing FROM following WHERE id=:id", id=session["user_id"])
+
     for c in check:
         if c["idfollowing"] == id_following:
             continue
         else:
             return apology("already following")
+
     name_following1= db.execute("SELECT username FROM users WHERE id=:id", id=id_following)
-
-
-    name_following=name_following1[0]["username"]
+    print(name_following1)
+    name_following = name_following1[0]["username"]
 
     db.execute("INSERT INTO following (id, idfollowing, name_following) VALUES (:id, :id_following, :name_following)", id=session["user_id"], id_following = id_following, name_following=name_following)
 
@@ -328,38 +305,57 @@ def following():
 
     following1 = db.execute("SELECT * FROM following WHERE id=:id", id=session["user_id"])
 
-    userbio = db.execute("SELECT bio FROM userbio WHERE id = :id", id=session["user_id"])
     name = db.execute ("SELECT firstname, surname FROM users WHERE id = :id", id=session["user_id"])
-    profile_picture = "niks"
 
     following=[]
 
     for f in following1:
         following.append(f["idfollowing"])
 
-    return render_template("following.html", following=following, name=name, userbio=userbio)
+    return render_template("following.html", following=following, name=name)
 
-@app.route("/user_profile_sett", methods=["GET", "POST"])
+
+@app.route("/user_profile", methods=["GET", "POST"])
 @login_required
-def user_profile_sett():
-    if request.method == "POST":
-        name=request.form.get("name")
-        user = db.execute("SELECT id FROM users WHERE username = :name", name = name)
-        user_id = user[0]["id"]
-        biography = db.execute("SELECT bio FROM userbio WHERE id = :user", user = user_id)
-        bio = biography[0]["bio"]
-        names = db.execute("SELECT * FROM users WHERE id = :user", user = user_id)
-        username = name
-        firstname = names[0]["firstname"]
-        surname = names[0]["surname"]
+def user_profile():
 
-        return render_template("user_profile_sett.html", bio = bio, username = username, firstname = firstname, surname = surname, id = user_id)
+    link = request.form.get("follow")
+
+    user = db.execute("SELECT id FROM likes WHERE link = :link", link = link)
+
+    if not user:
+        user = db.execute("SELECT id FROM likes WHERE id = :link", link = link)
+        user_id = user[0]["id"]
+    else:
+        user_id = user[0]["id"]
+
+    pictures = db.execute("SELECT * FROM pictures WHERE id = :user", user = user_id)
+
+    biography = db.execute("SELECT bio, profilepicture FROM userbio WHERE id = :user", user = user_id)
+    bio = biography[0]["bio"]
+    profilepicture = biography[0]["profilepicture"]
+
+    names = db.execute("SELECT * FROM users WHERE id = :user", user = user_id)
+    username = names[0]["username"]
+    firstname = names[0]["firstname"]
+    surname = names[0]["surname"]
+
+    following = db.execute("SELECT id, idfollowing FROM following WHERE id = :user_id GROUP BY id", user_id = session["user_id"])
+    following1 = []
+
+    for i in following:
+        value = i.get("idfollowing")
+        following1.append(value)
+
+    return render_template("user_profile.html", bio = bio, username = username, firstname = firstname, surname = surname,
+                            user_id = user_id, pictures = pictures, following1 = following1, profilepicture = profilepicture)
+
 
 @app.route("/unfollow", methods=["GET", "POST"])
 @login_required
 def unfollow():
     if request.method == "POST":
         name=request.form.get("unfollow")
-        db.execute("DELETE FROM following WHERE idfollowing=:name", name=name)
+        db.execute("DELETE FROM following WHERE idfollowing = :name", name=name)
 
         return redirect(url_for("following"))

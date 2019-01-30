@@ -14,17 +14,22 @@
     <thead class="thead">
         <tr>
           <th scope="col">User</th>
+          <th scope="col">Profile</th>
         </tr>
     </thead>
-        <tbody>
-            {% for f in following%}
-           <tr>
-            <td></form><form action="{{ url_for('user_profile_sett')}}" method= "POST"><input type="hidden" id="test" name="name" value="{{f}}"><button>{{f}}</button></form></td>
+    <tbody>
+            {% for f in following %}
+        <tr>
+        <td>
+            Username
+        </td>
 
-           </tr>
+        <td></form><form action="{{ url_for('user_profile')}}" method= "POST"><input type="hidden" id="test"
+                                        name="follow" value="{{f}}"><button class = "btn btn-success btn-settings">Profile</button></form></td>
+        </tr>
             {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 
 {% endblock %}

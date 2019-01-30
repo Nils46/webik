@@ -16,6 +16,9 @@
     <img src="{{profilepicture}}" class="profile-pic">
     <p><h5 class="card-title">Hi there, I'm {{firstname}} {{surname}}</h5></p>
     <p><h6 class="card-subtitle mb-2 text-muted">{{userbio}}</h6></p>
+      <form action="{{url_for('settings')}}" method="get">
+         <button type="submit" class="btn btn-success btn-settings"><span class="fas fa-cog"></span>Change profile</button>
+      </form>
   </div>
 </div>
 

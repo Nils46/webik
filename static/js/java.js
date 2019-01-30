@@ -6,7 +6,7 @@ function getData(){
     var input = document.getElementById("searchtext").value;
 
 
-    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q="+input+"&api_key=bJIEppj9qn0rqQZuSQKrgu0gC6iuqyhO&limit=8");
+    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q="+input+"&api_key=bJIEppj9qn0rqQZuSQKrgu0gC6iuqyhO&limit=10");
     xhr.done(function(response)
         { console.log("success got data", response);
 
@@ -16,7 +16,7 @@ function getData(){
 
         for (i in respond)
         {
-            $('.inner').append("<img src= '"+respond[i].images.original.url+"' style='height: 200px; width: 200px;'/>")
+            $('.inner').append("<img src= '"+respond[i].images.original.url+"' style='height: 100px; width: 100px;'/>")
 
             }
                     });
