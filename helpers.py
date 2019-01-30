@@ -9,11 +9,16 @@ import random
 import time
 from functools import wraps
 
+# database
 db = SQL("sqlite:///database.db")
+
 
 def apology(message):
 
     return render_template("apology.html", message = message)
+
+# login needed for functions
+
 
 def login_required(f):
     """
@@ -28,6 +33,9 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# two random chosen categories
+
+
 def categories():
 
     random.seed(datetime.today().day)
@@ -40,6 +48,9 @@ def categories():
     url1 = random_category_1 + ".jpg"
 
     return random_category, random_category_1, url, url1
+
+# grinder function if  categorie is car
+
 
 def grinder0(): #if category == "Cars":
 
@@ -67,6 +78,9 @@ def grinder0(): #if category == "Cars":
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "cars")
         else:
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "cars")
+
+# grinder function if  categorie is Yachts
+
 
 def grinder1(): #if cat == "Yachts":
 
@@ -99,6 +113,9 @@ def grinder1(): #if cat == "Yachts":
         else:
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "yachts")
 
+# grinder function if  categorie is Hotels
+
+
 def grinder2(): #if category == "Hotels":
 
     random.seed(datetime.today().microsecond)
@@ -120,14 +137,17 @@ def grinder2(): #if category == "Hotels":
         if request.method == "POST":
             if request.form.get("Foto5") == "Ja":
                 link= request.form.get("link1")
-                db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link = link)
+                db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link=link)
             elif request.form.get("Foto6") == "Ja":
                 link= request.form.get("link2")
-                db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link = link)
+                db.execute("UPDATE likes SET amount = amount + 1 WHERE link = :link", link=link)
 
-            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "hotels")
+            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category="hotels")
         else:
-            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "hotels")
+            return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category="hotels")
+
+# grinder function if  categorie is Watches
+
 
 def grinder3(): #if cat == "Watches":
 
@@ -158,19 +178,25 @@ def grinder3(): #if cat == "Watches":
         else:
             return render_template("grinder.html", url_choice=url_choice, url_choice_2=url_choice_2, category = "watches")
 
+# ranking the users with the most likes
+
+
 def draw_table():
 
-    ranking = db.execute("SELECT users.username as user, SUM(amount) as amount FROM users, likes WHERE users.id = likes.id GROUP BY likes.id")
+    ranking = db.execute(
+        "SELECT users.username as user, SUM(amount) as amount FROM users, likes WHERE users.id = likes.id GROUP BY likes.id")
 
     data = {}
     for i in ranking:
         key = i.get("user")
         value = i.get("amount")
-        data.update({key:value})
+        data.update({key: value})
 
-    data = dict(sorted(data.items(), key = lambda x:x[1], reverse=True)[0:10])
+    data = dict(sorted(data.items(), key=lambda x: x[1], reverse=True)[0:10])
 
     return render_template("top.html", data=data)
+
+# photo that has been uploaded is saved in database with the data: which user uploaded it and which categorie is belongs to.
 
 
 def upload0():
@@ -212,34 +238,34 @@ def upload0():
 
             filename = user + "-" + str(file.filename)
 
-            destination = "/".join ([target,filename])
+            destination = "/".join([target, filename])
 
             file.save(destination)
 
-            tot_dest= "/".join([target_url,filename])
+            tot_dest = "/".join([target_url, filename])
 
-            if check =="Cars":
+            if check == "Cars":
 
                 db.execute("UPDATE pictures SET cars = :cars WHERE id = :id", id=session["user_id"], cars = tot_dest)
                 db.execute("INSERT INTO likes (id, link, amount, category) VALUES (:id, :link, :amount, :category)",
-                            id = session["user_id"], link = tot_dest, amount = 0, category = "cars")
+                            id = session["user_id"], link=tot_dest, amount=0, category="cars")
 
-            elif check =="Yachts":
+            elif check == "Yachts":
 
-                db.execute("UPDATE pictures SET yachts = :yachts WHERE id = :id", id=session["user_id"], yachts = tot_dest)
+                db.execute("UPDATE pictures SET yachts = :yachts WHERE id = :id", id=session["user_id"], yachts=tot_dest)
                 db.execute("INSERT INTO likes (id, link, amount, category) VALUES (:id, :link, :amount, :category)",
-                            id = session["user_id"], link = tot_dest, amount = 0, category = "yachts")
+                            id=session["user_id"], link=tot_dest, amount=0, category="yachts")
 
-            elif check =="Hotels":
+            elif check == "Hotels":
 
-                db.execute("UPDATE pictures SET hotels = :hotels WHERE id = :id", id=session["user_id"], hotels = tot_dest)
+                db.execute("UPDATE pictures SET hotels = :hotels WHERE id = :id", id=session["user_id"], hotels=tot_dest)
                 db.execute("INSERT INTO likes (id, link, amount, category) VALUES (:id, :link, :amount, :category)",
-                id = session["user_id"], link = tot_dest, amount = 0, category = "hotels")
+                            id=session["user_id"], link = tot_dest, amount = 0, category = "hotels")
 
             else:
-                db.execute("UPDATE pictures SET watches = :watches WHERE id = :id", id=session["user_id"], watches = tot_dest)
+                db.execute("UPDATE pictures SET watches = :watches WHERE id = :id", id=session["user_id"], watches=tot_dest)
                 db.execute("INSERT INTO likes (id, link, amount, category) VALUES (:id, :link, :amount, :category)",
-                id = session["user_id"], link = tot_dest, amount = 0, category = "watches")
+                            id=session["user_id"], link=tot_dest, amount=0, category="watches")
 
         return redirect(url_for("index"))
 
@@ -247,12 +273,15 @@ def upload0():
 
         return render_template("upload.html")
 
+# converts to a useable url
+
+
 def categorieconverter(cats):
-    if cats =="Cars":
+    if cats == "Cars":
         return "/cars"
-    elif cats =="Yachts":
+    elif cats == "Yachts":
         return "/yachts"
-    elif cats =="Hotels":
+    elif cats == "Hotels":
         return "/hotels"
-    elif cats =="Watches":
+    elif cats == "Watches":
         return "/watches"

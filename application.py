@@ -5,7 +5,8 @@ from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 import os
 import random
-import urllib,json
+import urllib
+import json
 from urllib import request
 from helpers import *
 
@@ -31,6 +32,8 @@ Session(app)
 # configure CS50 Library to use SQLite database
 db = SQL("sqlite:///database.db")
 
+# indexpage for a logged-in-user and a not-logged-in-user
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -48,10 +51,16 @@ def index():
         print(firstname)
         return render_template("index.html", firstname = firstname, cats = cats, cat = cat, cat1 = cat1)
 
+# uplaod photo's
+
+
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload():
     return upload0()
+
+# log-in page
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -88,6 +97,9 @@ def login():
     else:
         return render_template("login.html")
 
+# register page
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     session.clear()
@@ -114,7 +126,7 @@ def register():
         elif not surname:
             return apology("You must provide your surname")
 
-
+        # encode password
         hash = pwd_context.hash(password)
         entry = db.execute("INSERT INTO users (username,hash, firstname, surname) VALUES(:username, :hash, :first_name, :surname)",
                            username=request.form.get("username"), hash=hash, first_name=request.form.get("first_name"), surname=request.form.get("surname"))
@@ -128,15 +140,24 @@ def register():
     else:
         return render_template("register.html")
 
+# ranking page
+
+
 @app.route("/top", methods=["GET", "POST"])
 @login_required
 def top():
     return draw_table()
 
+# categories page
+
+
 @app.route("/cats", methods=["GET", "POST"])
 @login_required
 def cats():
     return render_template("cats.html")
+
+# biography of user and profile picture of user is assigned to userid
+
 
 @app.route("/userbio", methods=["GET", "POST"])
 def userbio():
@@ -152,6 +173,8 @@ def userbio():
         name = username[0]["firstname"]
 
         db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
+
+        # target which folder picture must be saved
 
         target = os.path.join(os.getcwd(), 'static/GIPHY/')
         target_url = 'static/GIPHY'
@@ -174,25 +197,39 @@ def userbio():
     else:
         return render_template("userbio.html", name=name)
 
+# car is the categorie and photo's of cars shown to user
+
+
 @app.route("/cars", methods=["GET", "POST" ])
 @login_required
 def cars():
     return grinder0()
+
+# yachts is the categorie and photo's of yachts shown to user
+
 
 @app.route("/yachts", methods=["GET", "POST" ])
 @login_required
 def yachts():
     return grinder1()
 
+# hotels is the categorie and photo's of hotels shown to user
+
+
 @app.route("/hotels", methods=["GET", "POST" ])
 @login_required
 def hotels():
     return grinder2()
 
+# watches is the categorie and photo's of watches shown to user
+
 @app.route("/watches", methods=["GET", "POST" ])
 @login_required
 def watches():
     return grinder3()
+
+# logout function
+
 
 @app.route("/logout")
 def logout():
@@ -203,6 +240,9 @@ def logout():
 
     # redirect user to login form
     return redirect(url_for("index"))
+
+# profile page of the user self, where bio, profile picture and recent pictures are shown
+
 
 @app.route("/profile")
 @login_required
@@ -222,6 +262,9 @@ def profile():
     # redirect user to login form
     return render_template("profile.html", userbio = userbio, pictures = pictures, profilepicture = profilepicture,
                             firstname = firstname, surname = surname, username = username)
+
+# settings page where password, username and bio can be changed
+
 
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
@@ -276,6 +319,9 @@ def settings():
     else:
         return render_template("settings.html")
 
+# button that makes you follow someone
+
+
 @app.route("/follow", methods=["GET", "POST"])
 @login_required
 def follow():
@@ -302,6 +348,9 @@ def follow():
 
     return redirect(url_for("following"))
 
+# shows everyone who you follow
+
+
 @app.route("/following", methods=["GET", "POST"])
 @login_required
 def following():
@@ -319,6 +368,8 @@ def following():
         following.append((f["idfollowing"],firstname))
 
     return render_template("following.html", following=following)
+
+# profile pages of other user profiles, when clicked on to by logged in user.
 
 
 @app.route("/user_profile", methods=["GET", "POST"])
@@ -355,6 +406,8 @@ def user_profile():
 
     return render_template("user_profile.html", bio = bio, username = username, firstname = firstname, surname = surname,
                             user_id = user_id, pictures = pictures, following1 = following1, profilepicture = profilepicture)
+
+# button that makes you unfollow someone
 
 
 @app.route("/unfollow", methods=["GET", "POST"])
