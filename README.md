@@ -45,17 +45,17 @@ Wegwijs door de repository
 
 -   In /static staat alle stijl, foto's en JavaScript files
 
-  -   In /static/GIPHY staan alle profielfoto's
+ In /static/GIPHY staan alle profielfoto's
 
-  -   In /static/Hotels, /static/Yachts, /static/Cars en /static/Watches staan alle foto's van de desbetreffende categorie
+ In /static/Hotels, /static/Yachts, /static/Cars en /static/Watches staan alle foto's van de desbetreffende categorie
 
-  -   In /static/JS zitten de JavaScript files
+ In /static/JS zitten de JavaScript files
 
-  -   In static/styles.css staat de opmaak van de website
+ In static/styles.css staat de opmaak van de website
 
 -   In /templates zitten de .HTML files
 
-  -   In /templates/layout.html staat de code van de layout
+     In /templates/layout.html staat de code van de layout
 
 -   In /helpers.py staan alle functies die regelmatig worden gebruikt in application.py
 
