@@ -39,6 +39,8 @@ Features
 
 * Gebruikers kunnen foto's uploaden in categorieën
 
+* Gebruikers kunnen foto's waarderen door middel van een like
+
 * Gebruikers kunnen elkaar volgen/ontvolgen
 
 * Ranglijst met de meest gelikete gebruikers en foto
