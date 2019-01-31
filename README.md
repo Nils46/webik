@@ -1,13 +1,14 @@
 ![Imgur](https://i.imgur.com/MortyMy.png)
 
-Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
-
 Helios is een photo-sharing website, waar de foto centraal staat.
+
+Gerealiseerd door Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 
 
 Productvideo
 --------
 
+[Link naar de productvideo op Youtube](https://youtu.be/OZrwKHNxHtk)
 
 Screenshots
 --------
