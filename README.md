@@ -1,9 +1,8 @@
 Helios
 ------
 
-IK14
+Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 
-Boudewijn Welkzijn, Nils Böhne en Kjeld Roos
 --------------------------------------------
 
 Helios is een photo-sharing website, waar het om de foto's draait.
@@ -44,29 +43,30 @@ Features
 Wegwijs door de repository
 --------------------------
 
--   In het mapje static staat alle stijl, foto's en javascript files
+-   In /static staat alle stijl, foto's en JavaScript files
 
--   In het mapje static/GIPHY staan alle profielfoto's
+  -   In /static/GIPHY staan alle profielfoto's
 
--   In de mapjes static/Hotels, static/Yachts, static/Cars en static/Watches staan alle foto's in van die categorie
+  -   In /static/Hotels, /static/Yachts, /static/Cars en /static/Watches staan alle foto's van de desbetreffende categorie
 
--   In mapje static/JS zitten alle javascript bestanden
+  -   In /static/JS zitten de JavaScript files
 
--   In static/styles.css zit al onze stijl
+  -   In static/styles.css staat de opmaak van de website
 
--   In het mapje templates zitten al onze html bestanden
+-   In /templates zitten de .HTML files
 
--   In het bestand templates/layout.html staat de code van de navbar en alle source code files.
+  -   In /templates/layout.html staat de code van de layout
 
--   In het bestand 'helpers.py' staan alle functies, die regelmatig worden gebruikt in application.py.
+-   In /helpers.py staan alle functies die regelmatig worden gebruikt in application.py
 
--   In het bestand 'application.py' wordt de application geïnitialiseerd met alle routing-processen.
+-   In /application.py wordt de application geïnitialiseerd met alle routing-processen
 
-Verdeling van werk
+
+Taakverdeling
 ------------------
 
-Boudewijn heeft zich in eerste instantie gericht op het aanmaken van de beginnende structuur van de website en aan het veranderen van je password. Daarna de API werkend maken etc. met behulp van Nils. Daarna heef
+Boudewijn is voor een groot deel verantwoordelijk voor de GIPHY functie op Helios. Hij heeft hiervoor de achterliggende JavaScript code weten te realiseren. Daarnaast heeft Boudewijn ervoor gezorgd dat zowel de Python als HTML-code er verzorgd uit ziet.
 
-Kjeld heeft aan de ranking functie gewerkt. Ook heeft hij aan het volgen van users gewerkt.  Ook heeft hij zich gericht op de grinder page, het uploaden van foto's en de databasestructuur gewerkt.
+Kjeld heeft zich voornamelijk bezig gehouden met de achterliggende functies van Helios. Hij heeft zo een grote bijdrage geleverd aan de grinder functie, het ranking systeem maar ook aan het uploaden van foto's naar de database. Naast deze functies is Kjeld ook deels verantwoordelijk voor de database in zijn geheel. Voorderest heeft hij kleinere functies zoals het  volgen van gebruikres mogelijk gemaakt.
 
-Nils heeft voornamelijk aan de stijl van onze website gewerkt. Hij heeft met Kjeld gewerkt aan de ranking functie en de databasestructuur. Later richtte hij zich op de profielpagina van de user.
+Nils heeft voornamelijk aan de stijl van Helios gewerkt. Daarnaast heeft hij op het begin het Flask framework van de website klaar gelegd. Het gehele profiel is voor een aanzienlijk deel gemaakt door Nils. Ook heeft hij gezorgd dat het mogelijk is dat gebruikers hun profiel kunnen aanpassen. Voorderest heeft Nils samen met Kjeld de database structuur gebouwd, en geholpen aan functies van zowel Boudewijn als Kjeld.
