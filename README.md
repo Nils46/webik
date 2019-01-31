@@ -28,7 +28,7 @@ Features
 
 * Registreren
 
-* Username, password en biography veranderen
+* Gebruikersnaam, wachtwoord en biografie veranderen
 
 * Gebruikers kunnen een eigen profiel aanmaken
 
@@ -67,7 +67,7 @@ Wegwijs door de repository
 
       * In /static/JS zitten de JavaScript files
 
-      * In static/styles.css staat de opmaak van de website
+      * In /static/styles.css staat de opmaak van de website
       
 * In /templates zitten de .HTML files
 
