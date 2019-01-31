@@ -1,5 +1,5 @@
-Helios
-------
+![Imgur](https://i.imgur.com/MortyMy.png)
+
 
 Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 
@@ -9,7 +9,12 @@ Helios is een photo-sharing website, waar de foto centraal staat.
 Productvideo
 --------
 
-![Imgur](https://i.imgur.com/FcgjV2n.png)
+
+Screenshots
+--------
+
+
+![Imgur](https://i.imgur.com/AkbnywI.png)
 
 
 Features
