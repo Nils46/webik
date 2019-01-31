@@ -5,42 +5,51 @@ Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 
 Helios is een photo-sharing website, waar de foto centraal staat.
 
---------------------------------------------
 
+Productvideo
+--------
 
+![Imgur](https://imgur.com/a/k8dCkMc)
 
-![](https://lh4.googleusercontent.com/W6GoI11TrVzYyR_dNsDVR7pVLihcUmC-fRSHOPnPOpyF82EKn8LfJM576xeNxTkWDEwvKHTsnq-1F2DpRWp0eMPRcKn-a4NE4DVJa2rNQ2Ev-arAj-_gYznTBiaI0AoLqc3dBg1e)
-
-Foto 1: Index pagina als je ingelogd bent.
 
 Features
 --------
 
--   Inloggen
 
--   Uitloggen
+* Inloggen
 
--   Registreren
+* Uitloggen
 
--   Username, password en biography veranderen
+* Registreren
 
--   Gebruikers kunnen een eigen profiel aanmaken
+* Username, password en biography veranderen
 
--   Gebruikers kunnen foto's uploaden in categorieën
+* Gebruikers kunnen een eigen profiel aanmaken
 
--   Gebruikers kunnen elkaar volgen/ontvolgen
+     * Profielfoto uploaden
+     
+     * GIF zoeken
+     
+     * Biografie schrijven
 
--   Ranglijst met de meest gelikete users en foto
+* Gebruikers kunnen foto's uploaden in categorieën
 
--   Eigen profiel en die van anderen bekijken
+* Gebruikers kunnen elkaar volgen/ontvolgen
 
--   Wachtwoorden worden gehasht
+* Ranglijst met de meest gelikete gebruikers en foto
 
--   Wachtwoorden bij login weergeven
+* Eigen profiel en die van anderen bekijken
+     
+     * Recente foto's bekijken en downloaden
+
+* Wachtwoorden worden gehasht
+
+* Wachtwoord bij login weergeven
 
 
 Wegwijs door de repository
 --------------------------
+
 
 *  In /static staat alle stijl, foto's en JavaScript files
 
@@ -52,20 +61,18 @@ Wegwijs door de repository
 
       * In static/styles.css staat de opmaak van de website
       
-
 * In /templates zitten de .HTML files
 
-      * In /templates/layout.html staat de code van de layout
+     * In /templates/layout.html staat de code van de layout
       
-
 * In /helpers.py staan alle functies die regelmatig worden gebruikt in application.py
-
 
 * In /application.py wordt de application geïnitialiseerd met alle routing-processen
 
 
 Taakverdeling
 ------------------
+
 
 Boudewijn is voor een groot deel verantwoordelijk voor de GIPHY functie op Helios. Hij heeft hiervoor de achterliggende JavaScript code weten te realiseren. Daarnaast heeft Boudewijn ervoor gezorgd dat zowel de Python als HTML-code er verzorgd uit ziet.
 
