@@ -8,7 +8,7 @@ Gerealiseerd door Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 Productvideo
 --------
 
-[Link naar de productvideo op Youtube](https://youtu.be/OZrwKHNxHtk)
+[Link naar de productvideo op Youtube](https://youtu.be/DIbInhExLvM)
 
 Screenshots
 --------
