@@ -3,9 +3,11 @@ Helios
 
 Kjeld Roos, Nils Böhne & Boudewijn Welkzijn
 
+Helios is een photo-sharing website, waar de foto centraal staat.
+
 --------------------------------------------
 
-Helios is een photo-sharing website, waar het om de foto's draait.
+
 
 ![](https://lh4.googleusercontent.com/W6GoI11TrVzYyR_dNsDVR7pVLihcUmC-fRSHOPnPOpyF82EKn8LfJM576xeNxTkWDEwvKHTsnq-1F2DpRWp0eMPRcKn-a4NE4DVJa2rNQ2Ev-arAj-_gYznTBiaI0AoLqc3dBg1e)
 
@@ -22,40 +24,37 @@ Features
 
 -   Username, password en biography veranderen
 
--   Elke user kan een profielfoto of profiel-gifje uploaden
+-   Gebruikers kunnen een eigen profiel aanmaken
 
--   Elke user kan bij elke categorie een foto uploaden.
+-   Gebruikers kunnen foto's uploaden in categorieën
 
--   Elke user kan bekijken wie hem/haar volgt
+-   Gebruikers kunnen elkaar volgen/ontvolgen
 
--   Je kan als user elke volger ook ontvolgen
-
--   Ranglijst met de meest gelikete users
+-   Ranglijst met de meest gelikete users en foto
 
 -   Eigen profiel en die van anderen bekijken
-
--   Bij elke profiel kan je de meest recente foto's bekijken
 
 -   Wachtwoorden worden gehasht
 
 -   Wachtwoorden bij login weergeven
+
 
 Wegwijs door de repository
 --------------------------
 
 -   In /static staat alle stijl, foto's en JavaScript files
 
- In /static/GIPHY staan alle profielfoto's
+      In /static/GIPHY staan alle profielfoto's
 
- In /static/Hotels, /static/Yachts, /static/Cars en /static/Watches staan alle foto's van de desbetreffende categorie
+      In /static/Hotels, /static/Yachts, /static/Cars en /static/Watches staan alle foto's van de desbetreffende categorie
 
- In /static/JS zitten de JavaScript files
+      In /static/JS zitten de JavaScript files
 
- In static/styles.css staat de opmaak van de website
+      In static/styles.css staat de opmaak van de website
 
 -   In /templates zitten de .HTML files
 
-     In /templates/layout.html staat de code van de layout
+      In /templates/layout.html staat de code van de layout
 
 -   In /helpers.py staan alle functies die regelmatig worden gebruikt in application.py
 
