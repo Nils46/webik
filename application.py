@@ -32,10 +32,10 @@ Session(app)
 # configure CS50 Library to use SQLite database
 db = SQL("sqlite:///database.db")
 
-# indexpage for a logged-in-user and a not-logged-in-user
 
-@app.route('/')
+# indexpage for a logged-in-user and a not-logged-in-user@app.route('/')
 @app.route('/index')
+@app.route('/')
 def index():
 
     cats = categories()
@@ -43,25 +43,23 @@ def index():
     cat1 = categorieconverter(cats[1])
 
     if session.get("user_id") is None:
-        return render_template("index.html", cats = cats)
+        return render_template("index.html", cats=cats)
 
     else:
         account = db.execute("SELECT * FROM users WHERE id= :id", id=session["user_id"])
         firstname = account[0]["firstname"]
         print(firstname)
-        return render_template("index.html", firstname = firstname, cats = cats, cat = cat, cat1 = cat1)
-
-# uplaod photo's
+        return render_template("index.html", firstname=firstname, cats=cats, cat=cat, cat1=cat1)
 
 
+# upload photo's
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload():
     return upload0()
 
+
 # log-in page
-
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in."""
@@ -97,9 +95,8 @@ def login():
     else:
         return render_template("login.html")
 
+
 # register page
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     session.clear()
@@ -140,25 +137,22 @@ def register():
     else:
         return render_template("register.html")
 
+
 # ranking page
-
-
 @app.route("/top", methods=["GET", "POST"])
 @login_required
 def top():
     return draw_table()
 
+
 # categories page
-
-
 @app.route("/cats", methods=["GET", "POST"])
 @login_required
 def cats():
     return render_template("cats.html")
 
+
 # biography of user and profile picture of user is assigned to userid
-
-
 @app.route("/userbio", methods=["GET", "POST"])
 def userbio():
 
@@ -172,7 +166,7 @@ def userbio():
         username = db.execute("SELECT firstname FROM users WHERE id= :id", id=session["user_id"])
         name = username[0]["firstname"]
 
-        db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)",id=session["user_id"], bio=request.form.get("Text1"));
+        db.execute("INSERT INTO userbio (id, bio) VALUES (:id, :bio)", id=session["user_id"], bio=request.form.get("Text1"))
 
         # target which folder picture must be saved
 
@@ -185,52 +179,48 @@ def userbio():
 
             filename = user + "-" + str(file.filename)
 
-            destination = "/".join([target,filename])
+            destination = "/".join([target, filename])
             file.save(destination)
 
-            tot_dest= "/".join([target_url,filename])
+            tot_dest = "/".join([target_url, filename])
 
-            db.execute("UPDATE userbio SET profilepicture = :tot_dest WHERE id = :id", id=session["user_id"], tot_dest = tot_dest)
+            db.execute("UPDATE userbio SET profilepicture = :tot_dest WHERE id = :id", id=session["user_id"], tot_dest=tot_dest)
 
         return redirect(url_for("index"))
 
     else:
         return render_template("userbio.html", name=name)
 
-# car is the categorie and photo's of cars shown to user
 
-
-@app.route("/cars", methods=["GET", "POST" ])
+# car is the category and photo's of cars shown to user
+@app.route("/cars", methods=["GET", "POST"])
 @login_required
 def cars():
     return grinder0()
 
-# yachts is the categorie and photo's of yachts shown to user
 
-
-@app.route("/yachts", methods=["GET", "POST" ])
+# yachts is the category and photo's of yachts shown to user
+@app.route("/yachts", methods=["GET", "POST"])
 @login_required
 def yachts():
     return grinder1()
 
-# hotels is the categorie and photo's of hotels shown to user
 
-
-@app.route("/hotels", methods=["GET", "POST" ])
+# hotels is the category and photo's of hotels shown to user
+@app.route("/hotels", methods=["GET", "POST"])
 @login_required
 def hotels():
     return grinder2()
 
-# watches is the categorie and photo's of watches shown to user
 
-@app.route("/watches", methods=["GET", "POST" ])
+# watches is the category and photo's of watches shown to user
+@app.route("/watches", methods=["GET", "POST"])
 @login_required
 def watches():
     return grinder3()
 
+
 # logout function
-
-
 @app.route("/logout")
 def logout():
     """Log user out."""
@@ -241,9 +231,8 @@ def logout():
     # redirect user to login form
     return redirect(url_for("index"))
 
+
 # profile page of the user self, where bio, profile picture and recent pictures are shown
-
-
 @app.route("/profile")
 @login_required
 def profile():
@@ -260,12 +249,11 @@ def profile():
     username = account[0]["username"]
 
     # redirect user to login form
-    return render_template("profile.html", userbio = userbio, pictures = pictures, profilepicture = profilepicture,
-                            firstname = firstname, surname = surname, username = username)
+    return render_template("profile.html", userbio=userbio, pictures=pictures, profilepicture=profilepicture,
+                           firstname=firstname, surname=surname, username=username)
+
 
 # settings page where password, username and bio can be changed
-
-
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
 def settings():
@@ -278,14 +266,14 @@ def settings():
             old_password = request.form.get("old_password")
             new_password = request.form.get("new_password")
 
-            rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id = session["user_id"])
+            rows = db.execute("SELECT * FROM users WHERE id = :user_id", user_id=session["user_id"])
 
             if len(rows) != 1 or not pwd_context.verify(request.form.get("old_password"), rows[0]['hash']):
                 return apology("Old password invalid")
 
             hash = pwd_context.hash(new_password)
 
-            result = db.execute("UPDATE users SET hash = :hash", hash = hash)
+            result = db.execute("UPDATE users SET hash = :hash", hash=hash)
 
             # return index
             return redirect(url_for("profile"))
@@ -295,7 +283,8 @@ def settings():
 
             new_username = request.form.get("new_username")
 
-            result = db.execute("UPDATE users SET username = :new_username WHERE id = :user_id", user_id = session["user_id"], new_username = new_username)
+            result = db.execute("UPDATE users SET username = :new_username WHERE id = :user_id",
+                                user_id=session["user_id"], new_username=new_username)
 
             if not result:
                 return apology("Something went wrong")
@@ -308,7 +297,8 @@ def settings():
 
             new_bio = request.form.get("new_bio")
 
-            result = db.execute("UPDATE userbio SET bio = :new_bio WHERE id = :user_id", user_id = session["user_id"], new_bio = new_bio)
+            result = db.execute("UPDATE userbio SET bio = :new_bio WHERE id = :user_id",
+                                user_id=session["user_id"], new_bio=new_bio)
 
             if not result:
                 return apology("Something went wrong")
@@ -319,9 +309,8 @@ def settings():
     else:
         return render_template("settings.html")
 
+
 # button that makes you follow someone
-
-
 @app.route("/follow", methods=["GET", "POST"])
 @login_required
 def follow():
@@ -340,81 +329,79 @@ def follow():
         if f == id_following:
             return apology("You already follow this user")
 
-    name_following1= db.execute("SELECT username FROM users WHERE id=:id", id=id_following)
+    name_following1 = db.execute("SELECT username FROM users WHERE id=:id", id=id_following)
 
     name_following = name_following1[0]["username"]
 
-    db.execute("INSERT INTO following (id, idfollowing, name_following) VALUES (:id, :id_following, :name_following)", id=session["user_id"], id_following = id_following, name_following=name_following)
+    db.execute("INSERT INTO following (id, idfollowing, name_following) VALUES (:id, :id_following, :name_following)",
+               id=session["user_id"], id_following=id_following, name_following=name_following)
 
     return redirect(url_for("following"))
 
+
 # shows everyone who you follow
-
-
 @app.route("/following", methods=["GET", "POST"])
 @login_required
 def following():
 
     following1 = db.execute("SELECT * FROM following WHERE id=:id", id=session["user_id"])
 
-    name = db.execute ("SELECT firstname, surname FROM users WHERE id = :id", id=session["user_id"])
+    name = db.execute("SELECT firstname, surname FROM users WHERE id = :id", id=session["user_id"])
 
-    following=[]
+    following = []
 
     for f in following1:
         user = f["idfollowing"]
-        name = db.execute ("SELECT firstname FROM users WHERE id = :id", id=user)
+        name = db.execute("SELECT firstname FROM users WHERE id = :id", id=user)
         firstname = name[0]["firstname"]
-        following.append((f["idfollowing"],firstname))
+        following.append((f["idfollowing"], firstname))
 
     return render_template("following.html", following=following)
 
+
 # profile pages of other user profiles, when clicked on to by logged in user.
-
-
 @app.route("/user_profile", methods=["GET", "POST"])
 @login_required
 def user_profile():
 
     link = request.form.get("follow")
 
-    user = db.execute("SELECT id FROM likes WHERE link = :link", link = link)
+    user = db.execute("SELECT id FROM likes WHERE link = :link", link=link)
 
     if not user:
-        user = db.execute("SELECT id FROM likes WHERE id = :link", link = link)
+        user = db.execute("SELECT id FROM likes WHERE id = :link", link=link)
         user_id = user[0]["id"]
     else:
         user_id = user[0]["id"]
 
-    pictures = db.execute("SELECT * FROM pictures WHERE id = :user", user = user_id)
+    pictures = db.execute("SELECT * FROM pictures WHERE id = :user", user=user_id)
 
-    biography = db.execute("SELECT bio, profilepicture FROM userbio WHERE id = :user", user = user_id)
+    biography = db.execute("SELECT bio, profilepicture FROM userbio WHERE id = :user", user=user_id)
     bio = biography[0]["bio"]
     profilepicture = biography[0]["profilepicture"]
 
-    names = db.execute("SELECT * FROM users WHERE id = :user", user = user_id)
+    names = db.execute("SELECT * FROM users WHERE id = :user", user=user_id)
     username = names[0]["username"]
     firstname = names[0]["firstname"]
     surname = names[0]["surname"]
 
-    following = db.execute("SELECT id, idfollowing FROM following WHERE id = :user_id GROUP BY id", user_id = session["user_id"])
+    following = db.execute("SELECT id, idfollowing FROM following WHERE id = :user_id GROUP BY id", user_id=session["user_id"])
     following1 = []
 
     for i in following:
         value = i.get("idfollowing")
         following1.append(value)
 
-    return render_template("user_profile.html", bio = bio, username = username, firstname = firstname, surname = surname,
-                            user_id = user_id, pictures = pictures, following1 = following1, profilepicture = profilepicture)
+    return render_template("user_profile.html", bio=bio, username=username, firstname=firstname, surname=surname,
+                           user_id=user_id, pictures=pictures, following1=following1, profilepicture=profilepicture)
+
 
 # button that makes you unfollow someone
-
-
 @app.route("/unfollow", methods=["GET", "POST"])
 @login_required
 def unfollow():
     if request.method == "POST":
-        name=request.form.get("unfollow")
+        name = request.form.get("unfollow")
         db.execute("DELETE FROM following WHERE idfollowing = :name", name=name)
 
         return redirect(url_for("following"))

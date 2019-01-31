@@ -24,6 +24,8 @@
       <button class="btn btn-success btn-settings">Follow</button>
     </form>
 
+{% elif user_id == session["user_id"] %}
+
 {% else %}
 
     <form action="{{ url_for('unfollow')}}" method= "POST">
