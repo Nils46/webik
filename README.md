@@ -9,7 +9,7 @@ Helios is een photo-sharing website, waar de foto centraal staat.
 Productvideo
 --------
 
-[Imgur](https://i.imgur.com/FcgjV2n.png)
+![Imgur](https://i.imgur.com/FcgjV2n.png)
 
 
 Features
